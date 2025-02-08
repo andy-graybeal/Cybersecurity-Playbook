@@ -7,12 +7,12 @@
 
 2. **Something you are**
  - Individual characteristics or feature based
-   -- Fingerprints
+   - Fingerprints
 
 
 3. **Something you have**
  - Specific item in possession
-   -- ID Card
+   - ID Card
 
 
 4. **Someone you know** 
@@ -25,7 +25,7 @@
 
 6. **Something you can do**
  - Perform an activity that cannot be copied
-   -- Handwritten signature
+   - Handwritten signature
 
 
 7. **Something you know**
