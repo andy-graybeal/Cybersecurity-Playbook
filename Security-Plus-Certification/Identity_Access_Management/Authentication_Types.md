@@ -20,3 +20,10 @@
 7. Something you know
    - Knowledge that no one else possesses
      - A password
+
+
+## MFA - Multifactor Authentication 
+
+## Biometrics
+
+## Tokens
