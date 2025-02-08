@@ -1,33 +1,33 @@
 # Authentication Types
 
 
-1. ** Somewhere you are **
+1. **Somewhere you are**
  - Location based
 
 
-2. ** Something you are **
+2. **Something you are**
  - Individual characteristics or feature based
-  -- Fingerprints
+   -- Fingerprints
 
 
-3. ** Something you have **
+3. **Something you have**
  - Specific item in possession
-  -- ID Card
+   -- ID Card
 
 
-4. ** Someone you know ** 
+4. **Someone you know** 
  - Validated by another person
 
 
-5. ** Something you exhibit **
+5. **Something you exhibit**
  - Genetically determined characteristic
 
 
-6. ** Something you can do **
+6. **Something you can do**
  - Perform an activity that cannot be copied
-  -- Handwritten signature
+   -- Handwritten signature
 
 
-7. ** Something you know **
+7. **Something you know**
  - Knowledge that no one else possesses
-  - A password
+   - A password
