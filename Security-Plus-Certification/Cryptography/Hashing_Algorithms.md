@@ -29,7 +29,8 @@ Hashing algorithms can be used for digital signatures, authentication systems, m
 
  - Collision Attacks - A collision is two inputs that produce the same output
     - Collisions in MD algorithm are very easy to find.  The odds of a collision decrease the longer the digest ie SHA3-512
-    - Birthday attack: is a way to make finding collisions easier - It is based on a statistical phenomenom called the Birthday Paradox.  The Birthday Paradox says that for there to be a 50 percent chance that someone shares your birthday, 253 need to be present.  If you are looking for a greater than 50 percent chanec that any two people are in the room, you would only need 23 people.  It is harder to find a collision for a specific hash than it is to find two inputs that have the same hash.
+    - Birthday attack: is a way to make finding collisions easier - It is based on a statistical phenomenom called the Birthday Paradox.  The Birthday Paradox says that for there to be a 50 percent chance that someone shares your birthday, 253 need to be present.  If you are looking for a greater than 50 percent chanec that any two people are in the room, you would only need 23 people.
+       - Meaning: it is harder to find a collision for a specific hash than it is to find two inputs that have the same hash.
 
  - Brute Force, Dictionary, Rainbow attacks - Passwords are stored as hashes in authentication systems.  Attackers can use brute force, which brutally goes through each iteration and combination of the alphabet; dictionary and rainbow attacks use a table of words or common passwords to crack a password file.
     - To mitigate these attacks algorithm designers have come up with methods like:
