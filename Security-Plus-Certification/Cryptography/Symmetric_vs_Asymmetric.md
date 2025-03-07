@@ -40,5 +40,4 @@ And in turn asymmetric encryption is limited to sharing a public key, though it'
 
   - Symetric encryption is faster than asymmetric.
   - Symetric sucks if you lose your key.
-
-  -Will Quantum Computing squash them all?
+  - Will Quantum Computing squash them all?
