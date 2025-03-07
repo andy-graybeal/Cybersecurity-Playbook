@@ -17,7 +17,7 @@ In medieval times a firewall would sit at the entrance to a network, protecting 
 	   - Time
 	   - Context
 	   - Action
-  - Policy Based firewalls are considered more flexible.  It allows for generic statements to be used insetad of specific rules.  These can also apply content/URL filtering.
+  - Policy Based firewalls are considered more flexible.  Allowing for generic statements to be used insetad of specific rules.  These can also apply content/URL filtering.
 
 # Hardware or Software
   - Hardware firewalls have more features, are more expensive and can require more effort to configure and manage.  It's operating system is specialized  and has less of a footprint and it's less likely to have something malicious happen to it.
