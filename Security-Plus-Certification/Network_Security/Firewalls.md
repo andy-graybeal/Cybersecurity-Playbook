@@ -2,7 +2,7 @@
 
 ## Overview
 In medieval times a firewall would sit at the entrance to a network, protecting it from malicious activity.   To address modern technologies, firewalls now come in a rainbow of different colors with added functionality. They have become useful in different places.  We keep adding functionality to them that they might even be named a different appliance all together.  
-In it's basic sense, it's a packet filter.
+In it's basic sense, a firewall filters packets.
 
 # Rule and Policy Based firewalls
 
