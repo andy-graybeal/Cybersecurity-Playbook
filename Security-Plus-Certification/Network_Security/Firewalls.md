@@ -37,7 +37,7 @@ In medieval times a firewall would sit at the entrance to a network, protecting 
   - Stateful packet filtering operates at OSI layer 4.  Can make decsions based on sessions
   
 # Dedicatred vs Network Access Control List
-  - Other devices such as routers or switches can incorporate firewall's network ACL's and act like fireawalls 
+  - Other devices such as routers or switches can incorporate firewall's network ACL's and act like firewalls 
 
 # Specialized firewalls
   - Web Application Firewall (WAF) - Monitors applications using HTTP.  It can block websites or attacks that attempt to exploit vunerabilities in client apps, XSS and SQL injections.
