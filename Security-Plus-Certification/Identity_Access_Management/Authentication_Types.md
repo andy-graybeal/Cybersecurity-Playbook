@@ -23,11 +23,27 @@
 
 
 ## MFA - Multifactor Authentication 
- Combining more than one type of autnentation creditential - An common example is when you logon to a website with a username and password, the website will ring your phone with a code.  The two authentication types are:  something yuou know and something you have.
-
-## Biometrics
-
+ - MFA is combining more than one type of autnentation type 
+ - An common example is when you logon to a website with a username and password, the website will ring your phone with a string.  The two authentication types are:  something yuou know and something you have.
+	
 ## Tokens
-A token is a some type of object.
+An authentation token is used as part of MFA authentication - it's authentication type is something you have.
 
 ### Hardware Tokens
+A small device, usually able to attach to a keychain.  It displays a value based either on time or event.  That value is referred to as a One-Time Password (OTP)
+
+### Software Tokens
+Today, software tokens are increasingly more popular because smartphones have become pervasive and we carry them virtually everywhere.
+We can use a specific authentication app or simply use the SMS system to receive a string.
+
+## Biometrics
+Biometric is an authentication type catoregized as "Something You Are", like your fingerprints.
+ - Phsyiological Biometrics
+    - Facial recognition
+	- Finger prints
+	- Voice recognition
+	- A network of veins in your hand?
+	- Retinal scanner
+	- Iris scanner
+	- A gate scanner, the way you walk
+ 
