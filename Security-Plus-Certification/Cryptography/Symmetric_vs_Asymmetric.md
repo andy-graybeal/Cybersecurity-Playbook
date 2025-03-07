@@ -1,4 +1,5 @@
-# Symmetric and Asymmetric Cryptographhic algorithms -  The Key to Secrecy
+# Symmetric and Asymmetric Cryptographhic algorithms  
+The Key to Secrecy
 
 ## Overview
 Symmetric and Asymmetric cryptographic algorithms are considered a two-way algorithm. Two-way algorithms give us the ability to both encrypt AND decrypt data.   
