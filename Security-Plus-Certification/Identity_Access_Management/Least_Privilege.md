@@ -17,9 +17,10 @@ Least privilege is granting access that is limited to what is only necessary for
  - MS Windows uses a MAC implementation called Mandatory Integrity Control (MIC). A Security Identifier (SID) is a unique number issued to a user, group or session.  When a user logs in, the SID is retrieved from a DB and is used in all actions with the system.  The SID is linked to an Integrity Level.  Objects are assigned integrity levels, low, medium, high or system.  MIC works in addition to Windows DAC. 
  
 ### RBAC - Role-Based Access Control
- - Sometimes called Non-Discretionary Access Control.  RBAC is considered a more "real-world" access control than other schemes because the access under RBAC is based on a user's job function within an organization.  Instead of assigning persmissions to certain users or groups, it assigns permissions by roles.  Objects are set to a certain type to which subjects of a certain role have access.
-
-
+ - Sometimes called Non-Discretionary Access Control.  
+ - RBAC is considered a more "real-world" access control than other schemes because the access under RBAC is based on a user's job function within an organization.    
+ - RBAC assigns permissions by roles
+ - Objects are set to a certain type to which subjects of a certain role have access.
 
 ### RB-RBAC - Rule-Based Role Based Access Control 
 
