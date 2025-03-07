@@ -1,7 +1,7 @@
 # Firewall - Shades of Grey
 
 ## Overview
-In medieval times a firewall would sit at the entrance to a network, protecting it from malicious activity.   To address modern technologies, firewalls now come in a rainbow of different colors with added functionality, have become useful in different places and we keep adding functionality to them that they might even be named a different appliance all together.  
+In medieval times a firewall would sit at the entrance to a network, protecting it from malicious activity.   To address modern technologies, firewalls now come in a rainbow of different colors with added functionality, have become useful in different places and we keep adding functionality to them that they might even be named a different appliance all together.  In it's basic sense, it's a packet filter.
 
 # Rule and Policy Based firewalls
 
@@ -36,7 +36,7 @@ In medieval times a firewall would sit at the entrance to a network, protecting 
   - Steteless packet filtering operates at OSI layer 3.  Makes decisions just on it's rules
   - Stateful packet filtering operates at OSI layer 4.  Can make decsions based on sessions
   
-# Dedicatred vs Network Access Control List
+# Dedicated vs Network Access Control List
   - Other devices such as routers or switches can incorporate firewall's network ACL's and act like firewalls 
 
 # Specialized firewalls
