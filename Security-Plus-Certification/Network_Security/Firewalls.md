@@ -29,8 +29,8 @@ In medieval times a firewall would sit at the entrance to a network, protecting 
   - A virtual firewall is used in the cloud
 
 # Open Source or Proprietary
-  - Open-source firewalls, like pfSense run on FreeBSD, open and one of the most secure operating systems available
-  - Proprietary firewalls, well you don't know what they run on, they are closed and it's a big secret.  Security by Obscurity is not security.
+  - Open-source firewalls - like pfSense run on FreeBSD, open and one of the most secure operating systems available
+  - Proprietary firewalls - well you don't know what they run on, they are closed and it's a big secret.  Security by Obscurity is not security.
 
 # Stateful vs Stateless
   - Steteless packet filtering operates at OSI layer 3.  Makes decisions just on it's rules
