@@ -45,5 +45,5 @@ In it's basic sense, a firewall filters packets.
   - Next-generation Firewall (NGFW) - Can filter packets based on applications. Using "deep packet inspection" to determine if something malicious is included. Perform URL Filtering and Intrusion prevention services.
   - Unified Threat Management (UTM) - Swiss army knife style - combines packet filtering, antispam, antiphishing, antispyware, encryption, instrusion protection and web filtering
   - Layer 7 Firewall - Advanced traffic filtering and can determine if packets contain mailicous content
-  - Network Address Translation gateway (NAT) - a technology that allows private IP's to look like public IP's and can reverse NAT so the otherway around works too ie a public IP can be routed to a private IP
+  - Network Address Translation gateway (NAT) - a technology that allows private IP's to work on public IP network and can reverse NAT so the otherway around works too ie a public IP can be routed to a private IP
 
