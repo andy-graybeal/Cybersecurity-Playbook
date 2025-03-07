@@ -2,8 +2,7 @@
 # Symmetric and Asymmetric Cryptography - The Key to Secrecy
 
 ## Overview
-Symmetric and Asymmetric cryptographic algorithms are considered a two-way algorithm. Two-way algorithms give us the ability to both encrypt AND decrypt data.   
-This type of cryptography uses keys to unlock the encrypted data.
+Symmetric and Asymmetric cryptographic algorithms are considered a two-way algorithm. Two-way algorithms give us the ability to both encrypt AND decrypt data.  This type of cryptography uses keys to unlock the encrypted data.
 
 Symmetrically encrypted data uses the same key to encrypt and unencrypt.  
 Asymmetrically encrypted data uses two keys, a private and public key. One to encrypt and the other to unencrypt.
