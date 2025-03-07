@@ -1,4 +1,4 @@
-# Security Concepts and Models 
+# Security Concepts and Frameworks 
 
 
 ## Security Concepts
@@ -18,5 +18,5 @@ These concepts are considered the foundation to Cybersecurity
 - Accounting - makes record of resources accessed
 
 
-## Security Models
+## Security Frameworks
 
