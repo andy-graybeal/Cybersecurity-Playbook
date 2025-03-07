@@ -1,4 +1,4 @@
-# Hashing Algorithms 
+# Hashing Algorithms - The One Way Street
 
 ## Overview
 
