@@ -11,7 +11,7 @@ The usage of symmetric encryption are limited to applications that don't share k
 And in turn asymmetric encryption is limited to sharing a public key, though it's not that simple. A whole infrastructure for key sharing had to be built, Public Key Infrastruce (PKI).   
 
 
-## Uses
+## Common Uses
  - Symmetric encryption
     - Data storage (file systems, folders, disks)
 	- Data tunneling (VPN, SSH)	
