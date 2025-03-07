@@ -27,7 +27,7 @@
  - An common example is when you logon to a website with a username and password, the website will ring your phone with a string.  The two authentication types are:  something yuou know and something you have.
 	
 ## Tokens
-An authentation token is used as part of MFA authentication - it's authentication type is something you have.
+An authentation token is used as part of MFA authentication - it's authentication type is "Something You Have".
 
 ### Hardware Tokens
 A small device, usually able to attach to a keychain.  It displays a value based either on time or event.  That value is referred to as a One-Time Password (OTP)
@@ -45,5 +45,5 @@ Biometric is an authentication type catoregized as "Something You Are", like you
 	- A network of veins in your hand?
 	- Retinal scanner
 	- Iris scanner
-	- A gate scanner, the way you walk
+	- A gate scanner, the way you walk	
  
