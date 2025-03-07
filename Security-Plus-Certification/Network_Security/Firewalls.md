@@ -1,7 +1,7 @@
 # Firewall - Shades of Grey
 
 ## Overview
-In medieval times a firewall would sit at the entrance to a network, protecting it from malicious activity.   To address modern technologies, firewalls now come in a rainbow of different colors with added functionality, have become useful in different places and we keep adding functionality to them that they might even be named a different appliance all together.  
+In medieval times a firewall would sit at the entrance to a network, protecting it from malicious activity.   To address modern technologies, firewalls now come in a rainbow of different colors with added functionality. They have become useful in different places.  We keep adding functionality to them that they might even be named a different appliance all together.  
 In it's basic sense, it's a packet filter.
 
 # Rule and Policy Based firewalls
