@@ -26,7 +26,7 @@ Least privilege is granting access that is limited to what is only necessary for
 
  - Sometimes called Rule-based Access Control scheme or "automated provisioning".
  - Can dynamically assign roles to subjects bnased on a set of rules.  Each resource object contains a set of access properties based on the rules.
- - Often used for managijng user access to one or more systems, where business changes may trigger the application of the rules that specify accecss changes.
+ - Often used for managing user access to one or more systems, where business changes may trigger the application of the rules that specify accecss changes.
  - All access permissions are controlled based on rules established by the custodian or system administrator.
 
 ### ABAC - Attribute-Based Access Control 

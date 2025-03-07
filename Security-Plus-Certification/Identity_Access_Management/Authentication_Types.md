@@ -23,7 +23,11 @@
 
 
 ## MFA - Multifactor Authentication 
+ Combining more than one type of autnentation creditential - An common example is when you logon to a website with a username and password, the website will ring your phone with a code.  The two authentication types are:  something yuou know and something you have.
 
 ## Biometrics
 
 ## Tokens
+A token is a some type of object.
+
+### Hardware Tokens
