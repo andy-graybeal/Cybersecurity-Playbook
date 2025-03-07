@@ -37,7 +37,7 @@ And in turn asymmetric encryption is limited to sharing a public key, though it'
 	
 ## The Good, the Bad and the Ugly?
 
-Symetric encryption is faster than asymmetric.
-Symetric sucks if you lose your key.
+  - Symetric encryption is faster than asymmetric.
+  - Symetric sucks if you lose your key.
 
-Will Quantum Computing squash them all?
+  -Will Quantum Computing squash them all?
