@@ -1,3 +1,4 @@
-| Command | Description | Example |
+| Command | Description | Flags |
 | ------- | ----------- | ------- |
-| ls	  |	list files and directories | ls -al | 
+| ls	  |	list files and directories | -a list all  |
+|         |`            |   -l long |
