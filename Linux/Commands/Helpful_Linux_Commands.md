@@ -1,3 +1,3 @@
-| Command | Description |
-| ------- | ----------- |
-| ls	  |	list files and directories | 
+| Command | Description | Example |
+| ------- | ----------- | ------- |
+| ls	  |	list files and directories | ls -al | 
