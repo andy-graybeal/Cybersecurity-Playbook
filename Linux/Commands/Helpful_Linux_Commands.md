@@ -49,7 +49,7 @@
 | tac     | backwards cat
 | tail    | read last ten lines | -f follow log files |
 | tree    | print directory tree |
-| uname -a | show proc stuff | 
+| uname -a | show system info | 
 | unlink | delete a file |
 | updatedb | update db for locate |
 | usermod | modify user |
