@@ -4,6 +4,9 @@
 | adduser | add user    |         |
 |  alias  | make a command alias |
 | apropos | search man files | 
+| ascii   | list ascii character map |
+| bunzip2 | bunzip2 tool | 
+| bzip2   | bzip2 tool | 
 | cal     | display a calendar and the date of easter | 
 | cat     | concatenate files ||
 | chattr  | change file system attributes
@@ -29,6 +32,8 @@
 | gedit   | gui txt editor |
 | getfacl | get file access control lists |
 | grep    | Global regex print |
+| gunzip  | gunzip decompression tool |
+| gzip    | gzip compression tool |
 | halt    | prepare for power off |
 | head    | read first 10 lines of file |
 | help    | command reference |
@@ -60,6 +65,7 @@
 | su      | switch user
 | tac     | backwards cat
 | tail    | read last ten lines | -f follow log files |
+| tar     | tape archive |
 | tree    | print directory tree |
 | type    | dispaly information about a command type |
 | umask   | displays or sets the mode mask | 
@@ -67,6 +73,8 @@
 | unlink | delete a file |
 | updatedb | update db for locate |
 | unset | unset values and attributes of shell variables or function |
+| unxz  | unxz compression tool |
+| unzip | unzip compression tool |
 | usermod | modify user |
 | vi / vim | txt editor |
 | w       | show who is logged in and what they are doing | 
@@ -75,8 +83,8 @@
 | who     | show who is logged in |
 | whoami  | shows what user you are |
 | which   | shows path to command |
-
-
+| xz      | xz compression tool |
+| zip     | zip compression tool |
 
 
 
