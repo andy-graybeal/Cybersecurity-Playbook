@@ -15,6 +15,7 @@
 | chown   | change owner |
 | clear   | clear screen |
 | crontab | mantain cron files for individual users |
+| cut     | extracts specific sections of a file or piped data | 
 | date    | show the date |
 | deluser | delete user |
 | diff    | diff betweeen files |
@@ -49,6 +50,7 @@
 | mandb   | man page index cache |
 | more    | more is not less | 
 | nano    | txt editor |
+| nl      | add line numnbers
 | od      |  octal display |
 | passwd  | set password
 | pico    | txt editor |
@@ -66,6 +68,7 @@
 | tac     | backwards cat
 | tail    | read last ten lines | -f follow log files |
 | tar     | tape archive |
+| tr      | text translation | 
 | tree    | print directory tree |
 | type    | dispaly information about a command type |
 | umask   | displays or sets the mode mask | 
@@ -78,6 +81,7 @@
 | usermod | modify user |
 | vi / vim | txt editor |
 | w       | show who is logged in and what they are doing | 
+| wc      | counts number of bytes, characters, words and newlines in a file or STIN |
 | whatis  | display one line man page desc |
 | whereis | search for a comand or the man page of a command |
 | who     | show who is logged in |
