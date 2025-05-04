@@ -316,6 +316,30 @@
 | `useradd`         | Creates a new user or updates default new user information.                                                                                                                                                                                  |       |
 | `chage`           | Changes user account password expiration information.                                                                                                                                                                                        |       |
 | `userdel`         | Deletes a user account and related files.                                                                                                                                                                                                    |       |
+| `lp`          | Submits files for printing.                                                                                     |       |
+| `lpstat`      | Displays status information about the current classes, jobs, and printers.                                      |       |
+| `cupsaccept`  | Accepts print jobs for the specified destinations.                                                              |       |
+| `cupsenable`  | Starts the named printers or classes.                                                                           |       |
+| `cupsdisable` | Stops the named printers or classes.                                                                            |       |
+| `cupsreject`  | Rejects print jobs for the specified destinations.                                                              |       |
+| `lpoptions`   | Displays or sets printer options and defaults.                                                                  |       |
+| `cancel`      | Cancels print jobs.                                                                                              |       |
+| `lpr`         | Submits files for printing (BSD version of `lp`).                                                               |       |
+| `lpc`         | Provides limited control over printer and class queues.                                                         |       |
+| `lpq`         | Shows the current print queue status.                                                                           |       |
+| `lprm`        | Removes print jobs from the queue.                                                                              |       |
+| `lpadmin`     | Configures printer and class queues provided by CUPS.                                                           |       |
+| `faillog`     | Displays the contents of the failure log or sets login failure limits.                                          |       |
+| `lastlog`     | Reports the most recent login of all users or of a given user.                                                  |       |
+| `systemd-cat` | Connects a program's standard output and standard error with the journal.                                       |       |
+| `logger`      | Makes entries in the system log.                                                                                 |       |
+| `logrotate`   | Rotates, compresses, and mails system logs, and removes old ones.                                               |       |
+| `pwunconv`    | Updates `/etc/passwd` from `/etc/shadow` and disables shadow passwords.                                         |       |
+| `pwconv`      | Converts to shadow password format by moving password hashes to `/etc/shadow`.                                 |       |
+| `stat`        | Displays detailed information about a file or file system.                                                      |       |
+| `groups`      | Shows the groups a user is in.                                                                                   |       |
+| `newgrp`      | Logs in to a new group by changing the current group ID.                                                        |       |
+| `chgrp`       | Changes the group ownership of files.                                                                           |       |
 
 
 
