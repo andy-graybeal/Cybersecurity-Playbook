@@ -21,3 +21,14 @@ Assignment:
 > Grading: Counts toward Portfolio (40%). Graded Complete/Incomplete.
    
    
+I've chosen to assume I have a 10 year old machine.  I like Lenovo workstations, so I looked up popular Lenovo Thinkstation released 10 years ago.  The google results were a Thinkstation P series.  Within the series had a huge difference of computing power, I chose the most minimal workstation, the P300.
+
+* CPU Upgrade: Intel Xeon E3-1281 v3, E3-1276 v3, or an Intel Core i7-4790; all go into a LGA1150 socket- If it previously had a i3 or i5, this is a significant upgrade!  I've always wanted a Xeon processor so lets go with the Xeon E3-1281 as we haven't mention that money in an issue.
+* RAM Upgrade: 32MB max spread over 4 slots.  8GB per slot @ 1600mHz -- UDIMM DDR3-1600, in matched pairs.
+* Storage Upgrade: SSD w/ SATA
+* EUFI Settings:
+    - Enable "Intel Virtualization Technology"
+    - Enable "VT-d" for direct access to hardware from virtualized environments
+    - Enable "TxT" - "Trusted Execution Technology" Which uses a TPM
+    - Enable "Secure Boot"
+    - From the boot order, Exclude the FDD and the NIC
