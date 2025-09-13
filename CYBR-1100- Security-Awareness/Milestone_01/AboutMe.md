@@ -12,8 +12,6 @@ I am interested in pursuing a career in cybersecurity because I want to focus on
 - **Work Experience:** Worked full-time in IT supporting end users and server admin.
 
 ## 🚀 Career Goals  
-My short-term goal is to …  
-Earn industry certifications like CompTIA Security+ and CCNA while building hands-on experience through labs and internships.
+My short-term goal is to earn industry certifications like CompTIA Security+ and CCNA while building hands-on experience through labs and internships.
 
-My long-term goal is to …  
-Become a cybersecurity analyst, and eventually move into a penetration testing or security engineering role to help organizations protect critical systems.
+My long-term goal is to become a cybersecurity analyst, and eventually move into a penetration testing or security engineering role to help organizations protect critical systems.
