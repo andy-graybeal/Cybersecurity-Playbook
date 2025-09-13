@@ -13,9 +13,9 @@ Security awareness is important to my classmates because:
 
 ## 🛠️ Tailoring Training Materials
 To meet their needs, I will:  
-- Focus on **student-relevant threats** (phishing emails, campus Wi-Fi safety, safe file sharing).  
+- Focus on **student-relevant threats** (passwords, passkeys, passphrases, MFA and password managers).  
 - Create **clear, visually engaging materials** like posters, slides, and infographics.  
-- Include **interactive elements** (short quizzes, simulated phishing examples, or class discussions).  
+- Include **interactive elements** (creating strong yet memorable passwords).  
 - Align lessons with **real certification topics** (Security+, CCST, and CCNA Security concepts).  
 
 ---
