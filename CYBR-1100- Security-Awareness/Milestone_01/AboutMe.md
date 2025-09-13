@@ -7,9 +7,9 @@ Andy Graybeal
 I am interested in pursuing a career in cybersecurity because …  I want to focus on defending networks and systems against cyber threats and eventually work in a Security Operations Center (SOC).
 
 ## 🎓 Background  
-- **Education:**  Currently enrolled in the Cybersecurity & Network Systems program at Hocking College
-- **Hobbies:** Enjoy building PCs, playing strategy games, and solving capture-the-flag (CTF) challenges  
-- **Work Experience:** Worked full-time in IT support 
+- **Education:**  Currently enrolled in the Cybersecurity & Network Systems program at Hocking College.
+- **Hobbies:** Enjoy building PCs, playing strategy games, and solving capture-the-flag (CTF) challenges.
+- **Work Experience:** Worked full-time in IT supporting end users and server admin.
 
 ## 🚀 Career Goals  
 My short-term goal is to …  
