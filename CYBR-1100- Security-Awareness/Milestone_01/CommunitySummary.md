@@ -21,3 +21,8 @@ To meet their needs, I will:
 ---
 
 ✍️ *This project will help raise awareness among my peers while reinforcing the practical skills we are all building in the CNS program.*  
+
+---
+
+### 📌 Acknowledgment
+*This profile was drafted with assistance from ChatGPT (SAGE – Smart AI Guide for Education), OpenAI, 2025.*  
