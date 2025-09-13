@@ -15,3 +15,6 @@ I am interested in pursuing a career in cybersecurity because I want to focus on
 My short-term goal is to earn industry certifications like CompTIA Security+ and CCNA while building hands-on experience through labs and internships.
 
 My long-term goal is to become a cybersecurity analyst, and eventually move into a penetration testing or security engineering role to help organizations protect critical systems.
+
+### 📌 Acknowledgment
+*This profile was drafted with assistance from ChatGPT (SAGE – Smart AI Guide for Education), OpenAI, 2025.*  
