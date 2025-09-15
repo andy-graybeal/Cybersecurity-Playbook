@@ -1,2 +1,2 @@
 # Cool Links
-any.run
+https://any.run
