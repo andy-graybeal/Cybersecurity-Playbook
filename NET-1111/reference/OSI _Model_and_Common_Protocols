@@ -1,0 +1,11 @@
+### 🧩 Protocols Mapped to OSI Layers (Including ARP)
+
+| **OSI Layer**        | **Protocols / Services**                                                                 | **Port Numbers**         | **Purpose / Notes**                                                           |
+|----------------------|------------------------------------------------------------------------------------------|---------------------------|--------------------------------------------------------------------------------|
+| Layer 7 – Application| HTTP, HTTPS, FTP, SMTP, POP3, IMAP, DNS, SNMP, DHCP, Telnet, SSH, LDAP, RDP              | 80, 443, 21, 25, 110, 143, 53, 161, 67/68, 23, 22, 389, 3389 | Interfaces directly with user applications                                   |
+| Layer 6 – Presentation| SSL/TLS (used by HTTPS, FTPS, etc.)                                                     | Implicit in 443, 990      | Handles encryption, compression, translation                                 |
+| Layer 5 – Session     | NetBIOS, RPC                                                                             | 137–139, 135              | Manages sessions between applications                                        |
+| Layer 4 – Transport   | TCP, UDP                                                                                 | —                         | Ensures reliable/unreliable delivery via ports                               |
+| Layer 3 – Network     | IP (IPv4/IPv6), ICMP, ARP                                                                | —                         | Routing, addressing, and ARP for IP-to-MAC resolution                        |
+| Layer 2 – Data Link   | Ethernet, PPP, Frame Relay                                                               | —                         | MAC addressing, framing, error detection                                     |
+| Layer 1 – Physical    | Cables, Hubs, NICs, Fiber optics                                                         | —                         | Bit transmission over physical medium                                        |
