@@ -12,6 +12,7 @@
 | POP3 (Email retrieval)    | 110             | TCP                           | Retrieving email from server                     |
 | IMAP (Email retrieval)    | 143             | TCP                           | More advanced email retrieval                    |
 | SNMP (Network mgmt)       | 161             | UDP                           | Monitoring and managing network devices          |
+| SNMP (Network mgmt)       | 162             | UDP                           | Monitoring and managing network devices (traps)  |
 | LDAP (Directory services) | 389             | TCP/UDP                       | Accessing directory services                     |
 | HTTPS                     | 443             | TCP                           | Secure web traffic                               |
 | RDP (Remote Desktop)      | 3389            | TCP                           | Remote desktop access                            |
