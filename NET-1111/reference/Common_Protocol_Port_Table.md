@@ -42,4 +42,5 @@
 | Syslog                    | 514             | UDP                           | Standard for message logging                     |
 | SMTP (w/ TLS)             | 587             | TCP                           | Sending email (encrypted)                        |
 | LDAPS Secure LDAP         | 636             | TCP                           | Secure LDAP                                      |
+| MS-SQL                    | 1433            | TCP                           | Microsoft SQL                                    |
 | RDP (Remote Desktop)      | 3389            | TCP                           | Remote desktop access                            |
