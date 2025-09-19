@@ -29,6 +29,7 @@
 | SMTP (Email sending)      | 25              | TCP                           | Sending email                                    |
 | DNS (Domain Name System)  | 53              | UDP/TCP                       | Resolving domain names                           |
 | DHCP (Dynamic IP config)  | 67 (server), 68 | UDP                           | Assigning IP addresses                           |
+| TFTP Trivial FTP          | 69              | UDP                           | Very simple ftp, no auth                    |
 | HTTP                      | 80              | TCP                           | Web traffic (unencrypted)                        |
 | POP3 (Email retrieval)    | 110             | TCP                           | Retrieving email from server                     |
 | IMAP (Email retrieval)    | 143             | TCP                           | More advanced email retrieval                    |
