@@ -29,9 +29,10 @@
 | SMTP (Email sending)      | 25              | TCP                           | Sending email                                    |
 | DNS (Domain Name System)  | 53              | UDP/TCP                       | Resolving domain names                           |
 | DHCP (Dynamic IP config)  | 67 (server), 68 | UDP                           | Assigning IP addresses                           |
-| TFTP Trivial FTP          | 69              | UDP                           | Very simple ftp, no auth                    |
+| TFTP Trivial FTP          | 69              | UDP                           | Very simple ftp, no auth                         |
 | HTTP                      | 80              | TCP                           | Web traffic (unencrypted)                        |
 | POP3 (Email retrieval)    | 110             | TCP                           | Retrieving email from server                     |
+| NTP Network Time protocol | 123             | UDP                           | Synchronize clocks                               |
 | IMAP (Email retrieval)    | 143             | TCP                           | More advanced email retrieval                    |
 | SMB (CIFS) w/ Netbios     | 137 (UDP), 139 (TCP)| TCP/UDP                   | Windows File and Printer sharing                 |
 | SNMP (Network mgmt)       | 161, 162 (traps)| UDP                           | Monitoring and managing network devices          |
