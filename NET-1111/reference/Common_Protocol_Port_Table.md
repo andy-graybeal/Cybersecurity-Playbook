@@ -13,7 +13,7 @@
 | IMAP (Email retrieval)    | 143             | TCP                           | More advanced email retrieval                    |
 | SMB (CIFS) w/ Netbios     | 137 (UDP), 139 (TCP)| TCP/UDP                   | Windows File and Printer sharing                 |
 | SNMP (Network mgmt)       | 161, 162 (traps)| UDP                           | Monitoring and managing network devices          |
-| LDAP (Directory services) | 389             | TCP/                          | Accessing directory services                     |
+| LDAP (Directory services) | 389             | TCP/UDP                       | Accessing directory services                     |
 | HTTPS                     | 443             | TCP                           | Secure web traffic                               |
 | SMB (w/o Netbios)         | 445             | TCP                           | Windows file and Printer sharing                 |
 | RDP (Remote Desktop)      | 3389            | TCP                           | Remote desktop access                            |
@@ -36,11 +36,12 @@
 | IMAP (Email retrieval)    | 143             | TCP                           | More advanced email retrieval                    |
 | SMB (CIFS) w/ Netbios     | 137 (UDP), 139 (TCP)| TCP/UDP                   | Windows File and Printer sharing                 |
 | SNMP (Network mgmt)       | 161, 162 (traps)| UDP                           | Monitoring and managing network devices          |
-| LDAP (Directory services) | 389             | TCP/                          | Accessing directory services                     |
+| LDAP (Directory services) | 389             | TCP/UDP                       | Accessing directory services                     |
 | HTTPS                     | 443             | TCP                           | Secure web traffic                               |
 | SMB (w/o Netbios)         | 445             | TCP                           | Windows file and Printer sharing                 |
 | Syslog                    | 514             | UDP                           | Standard for message logging                     |
 | SMTP (w/ TLS)             | 587             | TCP                           | Sending email (encrypted)                        |
 | LDAPS Secure LDAP         | 636             | TCP                           | Secure LDAP                                      |
-| MS-SQL                    | 1433            | TCP                           | Microsoft SQL                                    |
+| MS-SQL (Database)         | 1433            | TCP                           | Microsoft SQL                                    |
 | RDP (Remote Desktop)      | 3389            | TCP                           | Remote desktop access                            |
+| SIP (VoIP)                | 5060, 5061      | TCP                           | Session Initiation Protocol                      |
