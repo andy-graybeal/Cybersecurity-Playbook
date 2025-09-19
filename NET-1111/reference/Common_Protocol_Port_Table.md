@@ -40,4 +40,5 @@
 | HTTPS                     | 443             | TCP                           | Secure web traffic                               |
 | SMB (w/o Netbios)         | 445             | TCP                           | Windows file and Printer sharing                 |
 | SMTP (w/ TLS)             | 587             | TCP                           | Sending email (encrypted)                        |
+| LDAPS Secure LDAP         | 636             | TCP                           | Secure LDAP                                      |
 | RDP (Remote Desktop)      | 3389            | TCP                           | Remote desktop access                            |
