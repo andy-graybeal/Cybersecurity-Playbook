@@ -39,6 +39,7 @@
 | LDAP (Directory services) | 389             | TCP/                          | Accessing directory services                     |
 | HTTPS                     | 443             | TCP                           | Secure web traffic                               |
 | SMB (w/o Netbios)         | 445             | TCP                           | Windows file and Printer sharing                 |
+| Syslog                    | 514             | UDP                           | Standard for message logging                     |
 | SMTP (w/ TLS)             | 587             | TCP                           | Sending email (encrypted)                        |
 | LDAPS Secure LDAP         | 636             | TCP                           | Secure LDAP                                      |
 | RDP (Remote Desktop)      | 3389            | TCP                           | Remote desktop access                            |
