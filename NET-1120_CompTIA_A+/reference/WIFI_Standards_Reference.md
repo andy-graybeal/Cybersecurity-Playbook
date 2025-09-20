@@ -1,0 +1,8 @@
+| **Standard**           | **Frequency Band(s)**                | **Max Throughput (theoretical)**               | **Typical Range** | **Notes**                                                            |
+| ---------------------- | ------------------------------------ | ---------------------------------------------- | ----------------- | -------------------------------------------------------------------- |
+| **802.11a**            | 5 GHz                                | 54 Mbps                                        | \~35 m indoors    | Less interference, shorter range than 2.4 GHz.                       |
+| **802.11b**            | 2.4 GHz                              | 11 Mbps                                        | \~35 m indoors    | Old, long range but easily interfered with (microwaves, Bluetooth).  |
+| **802.11g**            | 2.4 GHz                              | 54 Mbps                                        | \~35 m indoors    | Backward compatible with 802.11b, still used in older devices.       |
+| **802.11n**            | 2.4 GHz **and/or** 5 GHz (dual-band) | 600 Mbps (with MIMO)                           | \~70 m indoors    | First to use **MIMO (Multiple Input, Multiple Output)** antennas.    |
+| **802.11ac**           | 5 GHz only                           | \~1.3 Gbps (Wave 1), up to \~3.5 Gbps (Wave 2) | \~35 m indoors    | Uses **MU-MIMO** and wider 80/160 MHz channels.                      |
+| **802.11ax (Wi-Fi 6)** | 2.4 GHz **and** 5 GHz (dual-band)    | 9.6 Gbps                                       | \~70 m indoors    | Improves efficiency (OFDMA), better performance in crowded networks. |
