@@ -1,0 +1,16 @@
+| Compliance Authority / Regulation                                       | What It Is / Purpose                                                                                                         |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **HIPAA (Health Insurance Portability and Accountability Act)**         | U.S. law that regulates healthcare data privacy and security (protects PHI — Protected Health Information).                  |
+| **PCI DSS (Payment Card Industry Data Security Standard)**              | Industry standard (not a law) created by credit card companies; governs security for handling cardholder data.               |
+| **SOX (Sarbanes–Oxley Act)**                                            | U.S. law requiring proper financial reporting and auditing controls; affects IT systems that store/process financial data.   |
+| **GLBA (Gramm–Leach–Bliley Act)**                                       | U.S. law requiring financial institutions to safeguard customer financial information.                                       |
+| **GDPR (General Data Protection Regulation)**                           | European Union regulation for data privacy and protection of personal data; applies worldwide if handling EU citizens’ data. |
+| **FISMA (Federal Information Security Management Act)**                 | U.S. law requiring federal agencies to secure government information systems.                                                |
+| **FedRAMP (Federal Risk and Authorization Management Program)**         | U.S. government program for standardized cloud security assessment and authorization.                                        |
+| **NIST (National Institute of Standards and Technology)**               | Provides cybersecurity standards and frameworks (e.g., NIST Cybersecurity Framework, SP 800 series).                         |
+| **ISO/IEC 27001**                                                       | International standard for information security management systems (ISMS).                                                   |
+| **COBIT (Control Objectives for Information and Related Technologies)** | IT governance and management framework; helps align IT with business goals.                                                  |
+| **SOC 2 (System and Organization Controls 2)**                          | Audit standard for service providers on security, availability, processing integrity, confidentiality, and privacy.          |
+| **CIS Controls (Center for Internet Security)**                         | Best practices / benchmarks for securing systems and networks.                                                               |
+| **CCPA (California Consumer Privacy Act)**                              | U.S. state law granting California residents rights over personal data (similar to GDPR-lite).                               |
+| **CSA (Cloud Security Alliance)**                                       | Industry group providing security best practices for cloud computing.                                                        |
