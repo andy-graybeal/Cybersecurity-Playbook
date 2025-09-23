@@ -1,1 +1,1 @@
-CompTIA A+ 200-1101 & 200-1102 study material 
+CompTIA A+ 220-1101 & 220-1102 study material 
