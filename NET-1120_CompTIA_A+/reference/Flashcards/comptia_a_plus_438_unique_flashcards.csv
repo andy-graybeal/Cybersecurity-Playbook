@@ -1,0 +1,439 @@
+Front,Back
+Which protocol/service commonly uses TCP/UDP port 20?,FTP data
+Which port number is commonly used by FTP data?,20
+Which protocol/service commonly uses TCP/UDP port 21?,FTP control
+Which port number is commonly used by FTP control?,21
+Which protocol/service commonly uses TCP/UDP port 22?,SSH / SFTP
+Which port number is commonly used by SSH / SFTP?,22
+Which protocol/service commonly uses TCP/UDP port 23?,Telnet
+Which port number is commonly used by Telnet?,23
+Which protocol/service commonly uses TCP/UDP port 25?,SMTP
+Which port number is commonly used by SMTP?,25
+Which protocol/service commonly uses TCP/UDP port 53?,DNS
+Which port number is commonly used by DNS?,53
+Which protocol/service commonly uses TCP/UDP port 67?,DHCP server
+Which port number is commonly used by DHCP server?,67
+Which protocol/service commonly uses TCP/UDP port 68?,DHCP client
+Which port number is commonly used by DHCP client?,68
+Which protocol/service commonly uses TCP/UDP port 69?,TFTP
+Which port number is commonly used by TFTP?,69
+Which protocol/service commonly uses TCP/UDP port 80?,HTTP
+Which port number is commonly used by HTTP?,80
+Which protocol/service commonly uses TCP/UDP port 110?,POP3
+Which port number is commonly used by POP3?,110
+Which protocol/service commonly uses TCP/UDP port 123?,NTP
+Which port number is commonly used by NTP?,123
+Which protocol/service commonly uses TCP/UDP port 137?,NetBIOS name service
+Which port number is commonly used by NetBIOS name service?,137
+Which protocol/service commonly uses TCP/UDP port 138?,NetBIOS datagram service
+Which port number is commonly used by NetBIOS datagram service?,138
+Which protocol/service commonly uses TCP/UDP port 139?,NetBIOS session service
+Which port number is commonly used by NetBIOS session service?,139
+Which protocol/service commonly uses TCP/UDP port 143?,IMAP
+Which port number is commonly used by IMAP?,143
+Which protocol/service commonly uses TCP/UDP port 161?,SNMP (queries)
+Which port number is commonly used by SNMP (queries)?,161
+Which protocol/service commonly uses TCP/UDP port 162?,SNMP (traps)
+Which port number is commonly used by SNMP (traps)?,162
+Which protocol/service commonly uses TCP/UDP port 389?,LDAP
+Which port number is commonly used by LDAP?,389
+Which protocol/service commonly uses TCP/UDP port 427?,SLP
+Which port number is commonly used by SLP?,427
+Which protocol/service commonly uses TCP/UDP port 443?,HTTPS
+Which port number is commonly used by HTTPS?,443
+Which protocol/service commonly uses TCP/UDP port 445?,SMB/CIFS over TCP
+Which port number is commonly used by SMB/CIFS over TCP?,445
+Which protocol/service commonly uses TCP/UDP port 465?,SMTPS
+Which port number is commonly used by SMTPS?,465
+Which protocol/service commonly uses TCP/UDP port 514?,Syslog
+Which port number is commonly used by Syslog?,514
+Which protocol/service commonly uses TCP/UDP port 587?,SMTP submission
+Which port number is commonly used by SMTP submission?,587
+Which protocol/service commonly uses TCP/UDP port 636?,LDAPS
+Which port number is commonly used by LDAPS?,636
+Which protocol/service commonly uses TCP/UDP port 993?,IMAPS
+Which port number is commonly used by IMAPS?,993
+Which protocol/service commonly uses TCP/UDP port 995?,POP3S
+Which port number is commonly used by POP3S?,995
+Which protocol/service commonly uses TCP/UDP port 1433?,Microsoft SQL Server
+Which port number is commonly used by Microsoft SQL Server?,1433
+Which protocol/service commonly uses TCP/UDP port 1521?,Oracle
+Which port number is commonly used by Oracle?,1521
+Which protocol/service commonly uses TCP/UDP port 1723?,PPTP
+Which port number is commonly used by PPTP?,1723
+Which protocol/service commonly uses TCP/UDP port 1812?,RADIUS authentication
+Which port number is commonly used by RADIUS authentication?,1812
+Which protocol/service commonly uses TCP/UDP port 1813?,RADIUS accounting
+Which port number is commonly used by RADIUS accounting?,1813
+Which protocol/service commonly uses TCP/UDP port 3389?,RDP
+Which port number is commonly used by RDP?,3389
+Which protocol/service commonly uses TCP/UDP port 5060?,SIP (unencrypted)
+Which port number is commonly used by SIP (unencrypted)?,5060
+Which protocol/service commonly uses TCP/UDP port 5061?,SIP (TLS)
+Which port number is commonly used by SIP (TLS)?,5061
+Which protocol/service commonly uses TCP/UDP port 5900?,VNC
+Which port number is commonly used by VNC?,5900
+Which frequency band(s) does 802.11a primarily use?,5 GHz
+What was the maximum theoretical throughput of 802.11a?,54 Mbps
+What key feature was introduced or emphasized in 802.11a?,shorter range than 2.4 GHz
+Which frequency band(s) does 802.11b primarily use?,2.4 GHz
+What was the maximum theoretical throughput of 802.11b?,11 Mbps
+What key feature was introduced or emphasized in 802.11b?,more interference
+Which frequency band(s) does 802.11g primarily use?,2.4 GHz
+What was the maximum theoretical throughput of 802.11g?,54 Mbps
+What key feature was introduced or emphasized in 802.11g?,backwards compatible with 802.11b
+Which frequency band(s) does 802.11n primarily use?,2.4 and 5 GHz
+What was the maximum theoretical throughput of 802.11n?,600 Mbps (with 4x4 MIMO)
+What key feature was introduced or emphasized in 802.11n?,introduced MIMO
+Which frequency band(s) does 802.11ac primarily use?,5 GHz
+What was the maximum theoretical throughput of 802.11ac?,up to ~3.5 Gbps (theoretical)
+What key feature was introduced or emphasized in 802.11ac?,"wider channels, MU-MIMO"
+Which frequency band(s) does 802.11ax primarily use?,2.4 and 5 GHz (and 6 GHz for Wi‑Fi 6E)
+What was the maximum theoretical throughput of 802.11ax?,multi‑gig theoretical; high efficiency
+What key feature was introduced or emphasized in 802.11ax?,"OFDMA, TWT"
+Which 2.4 GHz Wi‑Fi channels are non‑overlapping in most regions?,"1, 6, and 11"
+What is a common cause of 2.4 GHz Wi‑Fi interference in homes?,"Microwave ovens, cordless phones, Bluetooth, neighboring APs"
+Which wireless security standard is currently recommended for best protection?,WPA3 (Personal/Enterprise)
+What is the difference between WPA2‑Personal and WPA2‑Enterprise?,Personal uses a pre‑shared key (PSK); Enterprise uses 802.1X with RADIUS
+What speeds/distances are typical for Cat 5e Ethernet cable?,1 Gbps up to 100 m
+What speeds/distances are typical for Cat 6 Ethernet cable?,10 Gbps up to ~55 m; 1 Gbps up to 100 m
+What speeds/distances are typical for Cat 6a Ethernet cable?,10 Gbps up to 100 m
+What speeds/distances are typical for Cat 7 Ethernet cable?,10 Gbps (shielded) up to 100 m
+What speeds/distances are typical for Cat 8 Ethernet cable?,25/40 Gbps short runs (data centers)
+What is the purpose of plenum‑rated cabling?,"Low‑smoke, fire‑resistant jacket for use in air plenums"
+What is the main difference between single‑mode and multi‑mode fiber?,Single‑mode uses a small core for long distances; multi‑mode uses a larger core for shorter runs
+Which fiber connectors are common in enterprise networks?,"LC, SC, and ST"
+Which transceiver form factor is commonly used for 1/10 Gbps fiber?,SFP / SFP+
+What device makes forwarding decisions based on MAC addresses?,Switch
+What device connects different networks and makes decisions based on IP addresses?,Router
+What device extends a wired network to wireless clients?,Wireless access point (AP)
+Which device can provide network address translation for many clients?,Router or gateway performing NAT/PAT
+What are the private IPv4 ranges?,"10.0.0.0/8, 172.16.0.0–172.31.255.255 (/12), 192.168.0.0/16"
+What is the APIPA address range?,169.254.0.0/16
+What does a subnet mask of 255.255.255.0 correspond to in CIDR?,/24
+What is the typical default gateway on a small LAN?,The router’s LAN IP address
+What does DHCP do on a network?,Dynamically assigns IP addresses and other TCP/IP settings
+What is the function of DNS?,Resolves hostnames to IP addresses
+What does a CPU heat sink and fan assembly do?,Dissipates heat from the processor
+What is the purpose of thermal paste?,Improves heat transfer between CPU and heat sink
+Which motherboard form factors are common in desktops?,"ATX, microATX, Mini‑ITX"
+Which power connector feeds the motherboard?,24‑pin ATX (plus 4/8‑pin CPU EPS)
+Which expansion interface offers the fastest graphics performance?,PCIe x16
+What are typical SATA revision speeds?,"SATA I 1.5 Gbps, SATA II 3 Gbps, SATA III 6 Gbps"
+Which storage interface offers the highest performance in modern desktops/laptops?,NVMe over PCIe (often via M.2)
+What does SMART stand for with hard drives?,"Self‑Monitoring, Analysis and Reporting Technology"
+What is the typical size of a 2.5‑inch SSD compared to M.2?,2.5‑inch uses SATA; M.2 is a gum‑stick card form factor
+What does ECC memory provide?,Error detection and correction for enhanced reliability
+Is RAM volatile or non‑volatile?,Volatile (data lost when power is removed)
+What does dual‑channel memory require?,Matching memory modules in paired slots for increased bandwidth
+Which display interface supports audio and video and is common on TVs?,HDMI
+Which display interface is common on PCs and supports daisy chaining?,DisplayPort
+Which legacy analog video connector has 15 pins?,VGA (DE‑15)
+List the major steps in the laser printing process in order.,"Processing, Charging, Exposing, Developing, Transferring, Fusing, Cleaning"
+In which laser printing step is toner permanently bonded to paper?,Fusing
+A user reports ghosted images on printouts. Which step/component is most likely?,Fuser or cleaning issues
+What is used to perform printer maintenance such as calibration and cleaning?,Printer’s maintenance menu or utility software
+What consumables do laser printers typically require?,"Toner, imaging drum (sometimes separate), fuser, transfer belt/rollers"
+What is the purpose of a docking station for laptops?,Provides additional ports and power; turns laptop into desktop‑like setup
+Which type of memory card is commonly used in smartphones?,microSD (on supported devices)
+Which battery technology is common in mobile devices?,Lithium‑ion (Li‑ion)
+What is a snapshot in virtualization?,A saved state of a VM that can be reverted to
+What is the difference between Type 1 and Type 2 hypervisors?,Type 1 runs on bare metal; Type 2 runs on a host OS
+"Define IaaS, PaaS, and SaaS briefly.",IaaS: infrastructure; PaaS: platform; SaaS: software delivered over the Internet
+List the steps of a best‑practice troubleshooting methodology.,"Identify the problem, Establish a theory of probable cause, Test the theory, Establish a plan of action and implement the solution, Verify full system functionality, Document findings, actions, and outcomes"
+PC shuts down randomly during games. What is a likely cause?,Overheating or failing PSU
+No display after installing a new GPU. First check?,Power connectors seated and monitor connected to GPU output
+Continuous beep codes at startup indicate what?,"Hardware failure (e.g., RAM/Video) — consult motherboard manual"
+What is NAT used for?,Translate private IP addresses to a public address for Internet access
+What does QoS do?,Prioritizes certain types of network traffic
+What is PoE used for?,Deliver electrical power over Ethernet cabling to devices like APs and IP cameras
+What tool is used to terminate UTP on a patch panel?,Punch‑down tool (110 block)
+Which tool verifies a cable’s pinout and continuity?,Cable tester
+What is a loopback plug used to test?,Network interface transmit/receive functionality
+What is the function of a UPS?,Provide battery backup and power conditioning
+Which RAID level provides striping with parity (fault tolerance with efficient capacity)?,RAID 5
+Which RAID level provides striping with dual parity for higher fault tolerance?,RAID 6
+Which RAID level provides mirroring for redundancy?,RAID 1
+Which RAID level provides performance only with no redundancy?,RAID 0 (striping)
+What connector is used for cable Internet modems?,F‑type coaxial connector
+What does BIOS/UEFI primarily do?,Initialize hardware and start the boot process
+What is the common form factor for laptop memory modules?,SO‑DIMM
+Which device isolates broadcast domains?,Router (or Layer 3 switch)
+Which device isolates collision domains on each port?,Switch
+What is the default VLAN on many switches?,VLAN 1
+Which setting on an AP limits connection by device MAC?,MAC filtering (security through obscurity; not robust)
+What is the purpose of port forwarding?,Map external ports to internal hosts/services
+What is the function of a DMZ in networking?,Adds a semi‑trusted zone for public‑facing services
+What is the typical size designation for M.2 drives?,"e.g., 2280 = 22 mm wide, 80 mm long"
+Which M.2 keys are common for NVMe SSDs?,M‑key (and sometimes B/M‑key)
+What is the role of a GPU?,Render graphics; can accelerate compute workloads
+Why use thermal throttling on CPUs/GPUs?,Reduce clock speeds to prevent overheating
+What is Wi‑Fi Protected Setup (WPS)?,Simplified device pairing; discouraged due to security issues
+Which cable type is immune to EMI?,Fiber optic
+What does half‑duplex mean on Ethernet?,Cannot send and receive simultaneously
+What does full‑duplex mean on Ethernet?,Send and receive simultaneously
+What is a VLAN?,Logical segmentation of a Layer 2 network
+What is trunking (802.1Q)?,Carrying multiple VLANs over a single link
+What is a patch panel used for?,Terminate and organize horizontal cabling runs
+What tool is used to locate a cable in a bundle?,Tone generator and probe
+What does DHCP reservation do?,Always assign same IP to a specific MAC address
+What is port mirroring?,Copy traffic from one switch port/VLAN to another for analysis
+What is the function of an IDS?,Detect potential intrusions (alert)
+What is the function of an IPS?,Detect and actively block intrusions
+What is a captive portal?,Web page that intercepts HTTP/HTTPS until authentication/acceptance
+What is PAT?,Port Address Translation; many private IPs share one public IP
+What is a subnet?,A logically subdivided portion of a network
+Which connector is used for telephone RJ‑11?,6P2C/6P4C; smaller than RJ‑45
+What is the purpose of a surge protector?,Protects devices from voltage spikes
+What is the function of a KVM switch?,Control multiple PCs with one keyboard/video/mouse
+Which wireless standard first introduced 5 GHz operation?,802.11a
+What is the primary advantage of 5 GHz over 2.4 GHz?,More channels and less interference
+What is the primary advantage of 2.4 GHz over 5 GHz?,Better range/penetration
+What is MU‑MIMO?,Multi‑User MIMO; serves multiple clients simultaneously
+What is OFDMA?,Orthogonal Frequency‑Division Multiple Access; slices channels for efficiency
+What is beamforming?,Focuses signal toward clients to improve throughput
+What does SSID stand for?,Service Set Identifier (Wi‑Fi network name)
+What is a guest network?,Isolated SSID for visitors with Internet‑only access
+What is the main purpose of a heat sink?,Increase surface area for heat dissipation
+Which component converts AC to DC in a PC?,Power Supply Unit (PSU)
+What is a common laptop pointing device built into the keyboard?,Touchpad (trackpad) or pointing stick
+What is the function of a backlight in an LCD?,Provides light source for the display
+What is the advantage of SSDs over HDDs?,Faster performance and lower latency
+What is RAID 10?,Mirroring + striping (RAID 1+0) for performance and redundancy
+What is cable modem technology called?,DOCSIS
+What is the purpose of a proxy server?,Intermediary for requests; caching and control
+What is a UTM appliance?,"Unified Threat Management: firewall, IDS/IPS, AV, etc."
+"In Windows, what does the command 'ipconfig' do?",Display IP configuration
+"In Windows, what does the command 'ping' do?",Test connectivity to a host
+"In Windows, what does the command 'tracert' do?",Trace route to a destination
+"In Windows, what does the command 'nslookup' do?",Query DNS records
+"In Windows, what does the command 'netstat' do?",Display active connections and listening ports
+"In Windows, what does the command 'chkdsk' do?",Check disk and file system
+"In Windows, what does the command 'sfc /scannow' do?",Scan and repair protected system files
+"In Windows, what does the command 'DISM' do?",Service and prepare Windows images
+"In Windows, what does the command 'tasklist' do?",List running processes
+"In Windows, what does the command 'taskkill' do?",Terminate a process
+"In Windows, what does the command 'gpupdate' do?",Refresh Group Policy
+"In Windows, what does the command 'gpresult' do?",Display Resultant Set of Policy
+"In Windows, what does the command 'msconfig' do?",Configure startup and boot options
+"In Windows, what does the command 'services.msc' do?",Manage Windows services
+"In Windows, what does the command 'eventvwr.msc' do?",Open Event Viewer
+"In Windows, what does the command 'perfmon' do?",Performance Monitor
+"In Windows, what does the command 'regedit' do?",Registry Editor
+"In Windows, what does the command 'compmgmt.msc' do?",Computer Management MMC
+"In Windows, what does the command 'devmgmt.msc' do?",Device Manager
+"In Windows, what does the command 'diskmgmt.msc' do?",Disk Management
+Which Event Viewer logs record authentication attempts?,Security log
+Which Event Viewer logs record driver and OS events?,System log
+Which Event Viewer logs record application‑level events?,Application log
+What file system is standard for modern Windows installations?,NTFS
+What is the difference between NTFS permissions and share permissions?,NTFS applies locally and over network; share applies only over network
+What does EFS do in Windows?,Encrypts individual files/folders on NTFS
+What is BitLocker used for?,Full‑disk encryption (often uses TPM)
+What Windows editions support joining an Active Directory domain?,Pro/Enterprise/Education (not Home)
+Describe full vs differential vs incremental backups.,Full: everything; Differential: since last full; Incremental: since last backup
+What is the 3‑2‑1 backup rule?,"3 copies, on 2 different media, 1 offsite"
+"In Linux, what does 'ls' do?",List directory contents
+"In Linux, what does 'cd' do?",Change directory
+"In Linux, what does 'pwd' do?",Print working directory
+"In Linux, what does 'cp' do?",Copy files
+"In Linux, what does 'mv' do?",Move/rename files
+"In Linux, what does 'rm' do?",Remove files
+"In Linux, what does 'mkdir' do?",Create directory
+"In Linux, what does 'chmod' do?",Change file permissions
+"In Linux, what does 'chown' do?",Change file ownership
+"In Linux, what does 'grep' do?",Search text with patterns
+"In Linux, what does 'ps' do?",List processes
+"In Linux, what does 'top' do?",Interactive process viewer
+"In Linux, what does 'df' do?",Disk free space
+"In Linux, what does 'du' do?",Disk usage
+"In Linux, what does 'free' do?",Memory usage
+"In Linux, what does 'ifconfig/ip a' do?",Show network interfaces and addresses
+"In Linux, what does 'ping' do?",Test connectivity
+"In Linux, what does 'nano/vi' do?",Text editors
+"In Linux, what does 'systemctl' do?",Control systemd services
+"In Linux, what does 'journalctl' do?",Query systemd logs
+"In Linux, what does 'apt/yum/dnf' do?",Package management
+"In Linux, what does 'tar' do?",Archive files
+"In Linux, what does 'ssh' do?",Remote shell
+"In Linux, what does 'scp' do?",Secure copy
+What does Time Machine do on macOS?,Performs system backups and restores
+What is Gatekeeper in macOS?,Controls app sources and signing to protect against malware
+What does Disk Utility do?,"Manage disks, partitions, and file system repairs"
+What is Spotlight used for?,"Search for files, apps, and information on macOS"
+What is Keychain Access?,Password and certificate management
+What is the principle of least privilege?,Users/applications receive only the minimum access needed
+What is MFA (multi‑factor authentication)?,Use of two or more independent authentication factors
+Give examples of authentication factors.,"Something you know, have, are; somewhere you are; something you do"
+What is a brute‑force attack?,Trying many passwords systematically until one works
+What is a dictionary attack?,Using lists of common passwords/words to guess
+What is shoulder surfing?,Observing someone’s input to capture credentials
+What is tailgating (piggybacking)?,Following someone through a secure door without credentials
+What is phishing?,Fraudulent messages to trick users into revealing information
+What is spear phishing?,Targeted phishing at a specific person or group
+What is whaling?,Phishing that targets executives or high‑profile individuals
+What is vishing?,Voice phishing via phone calls
+What is smishing?,SMS/text‑based phishing
+What is social engineering pretexting?,Creating a fabricated scenario to gain trust/access
+What is a man‑in‑the‑middle attack?,Intercepting communications between two parties
+What is ransomware?,Malware that encrypts files and demands payment
+What is a worm?,Self‑replicating malware that spreads without user action
+What is a trojan?,Malicious code disguised as legitimate software
+What is a rootkit?,Malware that hides its presence and provides privileged access
+What is spyware?,Software that secretly gathers user information
+What is an adware?,Software that displays unwanted ads; may track behavior
+What is DNS poisoning?,Altering DNS responses to redirect users
+What is ARP poisoning?,Spoofing MAC addresses to redirect traffic
+What is Zero‑Day vulnerability?,A flaw that is exploited before a patch is available
+What is patch management?,Maintaining systems with updates and security fixes
+What is principle of defense in depth?,Multiple layers of security controls
+What is least functionality?,Disable/remove unnecessary features to reduce attack surface
+What is chain of custody in incident response?,Documented handling of evidence to maintain integrity
+What is the purpose of an acceptable use policy (AUP)?,Define appropriate use of company resources
+What is PII?,Personally Identifiable Information
+What is PHI?,Protected Health Information
+What is GDPR?,EU regulation for data protection and privacy
+What is change management?,"Formal process for requesting, approving, and documenting changes"
+Why document troubleshooting steps and outcomes?,Helps future cases and knowledge sharing
+What is an SLA?,Service Level Agreement defining service expectations
+What PPE helps prevent ESD?,ESD wrist strap and anti‑static mat
+What does SDS stand for in safety?,Safety Data Sheet
+Which Windows feature provides full‑disk encryption requiring TPM?,BitLocker
+Which Windows editions include Hyper‑V client?,Pro/Enterprise/Education (hardware support required)
+What tool manages local users and groups in Windows?,lusrmgr.msc
+What is a common fix for corrupted Windows system files?,Run 'sfc /scannow' then 'DISM /RestoreHealth'
+Browser shows many pop‑ups after installing free software. Likely cause?,Adware/PUAs; remove extensions and scan for malware
+PC is slow only when network copying files. Likely cause?,"Network congestion, duplex mismatch, or disk bottleneck"
+Application crashes after update. First step?,Roll back or update to latest patch; check logs
+Blue screen after driver install. What to try?,Boot Safe Mode and roll back or update driver
+What is MDM?,Mobile Device Management for centralized policy and control
+What is remote wipe?,Remotely erase data on a lost or stolen device
+Name common mobile screen locks.,"PIN, password, pattern, fingerprint, face ID"
+What does geofencing allow?,Apply policies based on device location
+What is sideloading on Android?,Installing apps from outside official store
+What is System Restore used for?,Revert system files/settings to a previous snapshot
+What is Safe Mode?,Minimal boot with basic drivers for troubleshooting
+What is the purpose of the Windows Registry?,Centralized configuration database
+What does 'net use' do?,Map/unmap network drives
+How do you open Device Manager quickly?,devmgmt.msc or via Computer Management
+What is a security token (something you have)?,Physical or soft token generating codes
+What is biometric authentication?,"Verifying identity via physical traits (fingerprint, face)"
+What is single sign‑on (SSO)?,Authenticate once to access multiple systems
+What is RADIUS used for?,Centralized AAA for network access
+What is TACACS+ used for?,AAA protocol often for device administration
+Which command releases and renews a DHCP lease in Windows?,ipconfig /release and ipconfig /renew
+Which command flushes the DNS resolver cache in Windows?,ipconfig /flushdns
+Which command tests name resolution for a given host?,nslookup or Resolve‑DNSName (PowerShell)
+What is UAC in Windows?,User Account Control to prevent unauthorized changes
+What is the Hosts file used for?,Local hostname to IP mappings
+What is PowerShell?,Command‑line shell and scripting language for Windows
+What is Remote Assistance?,Allow a helper to view/control your PC with consent
+What is RDP used for?,Remote desktop control over the network
+What is the function of a proxy in enterprise networks?,Filter and cache web traffic; enforce policy
+What is port security on a switch?,Restricts which MACs can connect to a port
+What is geolocation privacy concern on mobiles?,Apps tracking location without consent
+What is the purpose of a screen lock timeout?,Reduce risk of unauthorized access when unattended
+What is a VPN?,Encrypted tunnel over untrusted networks
+What is the difference between IDS and IPS?,IDS detects and alerts; IPS actively blocks
+What is a standard method to securely erase SSDs?,Use vendor secure erase or crypto‑erase
+What is whitelisting vs blacklisting apps?,Allow only approved apps vs block known bad apps
+What is a standard email security best practice?,Enable spam filtering and phishing protection; MFA for accounts
+What is a differential backup advantage?,Faster restore than incremental (only last full + last diff)
+What is the function of 'task scheduler'?,Run tasks or scripts at specified times or triggers
+What is system image backup?,Full snapshot of OS and data for bare‑metal restore
+What tool edits Group Policy locally?,gpedit.msc (on Pro editions)
+What is a service pack/cumulative update?,Bundle of fixes and features released together
+What is SMB used for?,File and printer sharing on Windows networks
+A user cannot obtain an IP address and sees 169.254.x.x. What service likely failed?,DHCP
+Laptop Wi‑Fi is slow only on 2.4 GHz but fine on 5 GHz. What is the likely cause?,2.4 GHz interference or congestion
+Pages smear and rub off after printing. Which component is suspect?,Fuser not heating properly
+Which backup type clears the archive bit after completion?,Incremental backup
+A PC boots to 'No boot device found'. First simple check?,Boot order and drive connections
+You replaced a motherboard. Which Windows activation issue may occur?,Hardware change may require reactivation
+Which Linux command shows current IP addresses?,ip a (or ifconfig)
+Which Windows utility edits startup programs in modern versions?,Task Manager → Startup tab
+What is the purpose of a privacy screen filter on laptops?,Reduce viewing angles to deter shoulder surfing
+What is the safest way to handle a swollen Li‑ion battery?,"Power down, do not puncture, follow e‑waste procedures"
+What does 'Run as administrator' do?,Launches a process with elevated privileges
+Which log would show failed logon attempts in Windows?,Security log
+Which command tests connectivity step‑by‑step across routers?,tracert (Windows) / traceroute (Linux/macOS)
+Which Windows feature allows restoring previous file versions?,File History / Previous Versions
+What does a POST beep code generally indicate?,Hardware initialization error
+Which connector delivers additional CPU power?,4‑pin/8‑pin EPS (ATX12V)
+What is a typical laptop drive form factor before M.2?,2.5‑inch SATA
+What is the purpose of thermal design power (TDP)?,Indicates maximum heat a cooling system must dissipate
+Which utility checks Windows disk for bad sectors?,chkdsk /r
+What is the main benefit of virtualization for labs?,Snapshot/rollback and resource isolation
+What is the main benefit of containers?,Lightweight isolation sharing the host OS kernel
+Which protocol secures website traffic with certificates?,HTTPS (TLS)
+What is two‑step verification?,An MFA method requiring a second step after password
+Why should default router passwords be changed?,Reduce risk of unauthorized access
+What is the purpose of a guest user account policy?,Limit access for temporary users
+Why use strong unique passwords?,Reduce risk from credential stuffing and breaches
+What is a common sign of malware infection?,"Unexpected pop‑ups, slowdowns, unknown processes"
+Which Windows tool removes startup items and services for diagnosis?,msconfig (Selective startup)
+What is safe disposal for magnetic drives?,"Degauss, shred, or certified destruction"
+What protects data in transit on public Wi‑Fi?,VPN
+Which wireless setting isolates clients from seeing each other?,AP client isolation
+What is purpose of a UPS line‑interactive mode?,Voltage regulation with battery backup
+What is a brownout?,Drop in voltage causing dimming lights; can harm electronics
+What does a surge protector Joule rating indicate?,How much energy it can absorb from spikes
+What does the 'ip a' Linux command show?,Interfaces and IP addresses
+How do you show hidden files in Windows Explorer?,View → Show → Hidden items
+What is a restore point?,Snapshot of system files/settings
+What is the difference between hibernate and sleep?,Hibernate saves to disk; sleep keeps RAM powered
+Which Windows feature allows rolling back a driver?,Device Manager → Roll Back Driver
+What is Secure Boot?,UEFI feature that allows only trusted bootloaders
+What is PXE boot used for?,Network booting to install or image systems
+What is imaging in deployment?,Cloning a prepared OS image to many machines
+What is the function of a KMS server?,Activate volume‑licensed Microsoft products
+What does 'chmod 755' do?,Owner rwx; group r-x; others r-x
+What does 'chown user:group file' do?,Change file owner and group
+Which Linux file stores user account information?,/etc/passwd (with hashes in /etc/shadow)
+Which command shows listening ports in Windows?,netstat -ano
+Which tool inspects group policy results on a workstation?,gpresult /r
+What can cause 'limited connectivity' in Windows?,"Bad IP, DHCP failure, driver issues, cable/AP problems"
+What does a VPN concentrator do?,Terminates and manages VPN connections
+What is a screen dooring effect?,Visible pixel grid; more on low‑PPI displays
+Which display tech offers true blacks?,OLED
+What is the function of a color calibration tool?,Adjust display to accurate color profile
+What is ECC vs non‑ECC RAM target use?,ECC for servers/workstations; non‑ECC for consumers
+What is a device driver?,Software that allows OS to communicate with hardware
+What is a kernel panic?,Unix‑like OS fatal error halting the system
+Which log contains Linux kernel messages?,journalctl -k (or /var/log/kern.log)
+What is sudo?,Execute a command as another user (often root)
+What is the root account in Linux?,Superuser with full control
+What is safe mode with networking used for?,Troubleshoot with basic drivers plus network access
+How to boot to Windows Recovery Environment quickly?,Hold Shift while clicking Restart
+Which Windows tool repairs boot records?,bootrec /fixmbr and /fixboot in WinRE
+What is a service dependency?,A service that must start before another can run
+Why use DNS over HTTPS (DoH)?,Encrypt DNS queries for privacy/integrity
+What is a captive portal bypass risk?,Users may connect without policy enforcement if misconfigured
+What causes IP address conflict?,Two devices configured with same static IP
+What is the difference between static and dynamic IP?,Static is manually set; dynamic via DHCP
+What is link‑local IPv6 prefix?,fe80::/10
+What is SLAAC in IPv6?,Stateless Address Autoconfiguration
+Which tool monitors performance counters in Windows?,perfmon
+Which Windows feature lets you mount ISO files?,Built‑in Explorer 'Mount'
+What is a restore from bare metal?,Reinstall to a blank drive from a full system image
+What is the purpose of a patch panel label scheme?,Eases maintenance and troubleshooting
+How do you safely clean a laser printer?,Use approved toner vacuum and lint‑free cloth; avoid compressed air
+What is duplex printing?,Automatic printing on both sides of paper
+What is collating?,Printing sets of multi‑page documents in order
+What is spooling?,Queueing print jobs on disk before printing
+Which command shows Windows OS version details?,winver (GUI) or 'systeminfo'
+What is the advantage of SSD TRIM?,Maintains performance by clearing unused blocks
+Which RAID levels provide redundancy?,"RAID 1, 5, 6, 10 (not RAID 0)"
+What is throughput vs latency?,Throughput = volume over time; latency = delay
+What is cable crosstalk?,Signal interference between adjacent pairs
+What is shielding used for?,Reduce EMI/RFI on cabling
+What is a keystone jack?,Modular snap‑in connector for wall plates/patch panels
+What is a demarcation point?,Where provider’s network ends and customer’s begins
+What is a smart jack?,Provider‑managed interface with diagnostics
+What is firmware?,Software programmed into hardware devices
+What does BIOS stand for?,Basic Input/Output System
+What is UEFI?,Modern firmware interface replacing legacy BIOS
+What is TPM used for?,Secure cryptographic operations and key storage
+What is BitLocker recovery key?,Backup key to unlock encrypted drive
+What is Kerberos used for in AD?,Authentication protocol for domain logons
+Endpoint hardening best practice: name one action,"Apply patches promptly, enable MFA, use least privilege, and enforce strong passwords"
