@@ -1,0 +1,484 @@
+Front,Back
+What does OSI Layer 1 handle?,"Physical: bits, signaling, cabling"
+What does OSI Layer 2 handle?,"Data Link: frames, MAC addressing, switches"
+What does OSI Layer 3 handle?,"Network: packets, IP addressing, routing"
+What does OSI Layer 4 handle?,"Transport: TCP/UDP, segmentation, flow control"
+What does OSI Layer 5 handle?,"Session: dialogs, connections"
+What does OSI Layer 6 handle?,"Presentation: data format, encryption, compression"
+What does OSI Layer 7 handle?,"Application: HTTP, DNS, SMTP"
+What is the PDU at Layer 2?,Frame
+What is the PDU at Layer 3?,Packet
+What is the PDU at Layer 4?,Segment (TCP)/Datagram (UDP)
+Which service uses TCP 20/21?,FTP
+Which service uses TCP 22?,SSH/SFTP/SCP
+Which service uses TCP 23?,Telnet
+Which service uses TCP 25?,SMTP
+Which service uses UDP/TCP 53?,DNS
+Which service uses UDP 67/68?,DHCPv4
+Which service uses TCP 80?,HTTP
+Which service uses TCP 110?,POP3
+Which service uses TCP 143?,IMAP
+Which service uses TCP 443?,HTTPS
+Which service uses TCP 445?,SMB/CIFS
+Which service uses TCP 3389?,RDP
+Which service uses UDP 161/162?,SNMP
+Which service uses TCP 389?,LDAP
+Which service uses UDP 123?,NTP
+How many usable hosts in /30?,2
+What is the subnet mask for /30?,255.255.255.252
+How many usable hosts in /29?,6
+What is the subnet mask for /29?,255.255.255.248
+How many usable hosts in /28?,14
+What is the subnet mask for /28?,255.255.255.240
+How many usable hosts in /27?,30
+What is the subnet mask for /27?,255.255.255.224
+How many usable hosts in /26?,62
+What is the subnet mask for /26?,255.255.255.192
+What is APIPA range?,169.254.0.0/16
+What is IPv4 loopback address?,127.0.0.1
+What are private IPv4 ranges?,"10/8, 172.16/12, 192.168/16"
+What is IPv6 loopback?,::1
+What is IPv6 unspecified address?,::
+What is IPv6 link-local prefix?,fe80::/10
+What is IPv6 global unicast prefix?,2000::/3
+What replaces ARP in IPv6?,NDP
+What is SLAAC?,Stateless Address Autoconfiguration
+What is IPv6 all-nodes multicast?,ff02::1
+What is IPv6 all-routers multicast?,ff02::2
+What is default IPv4 route?,0.0.0.0/0
+What is default IPv6 route?,::/0
+What metric does RIP use?,Hop count
+What type of protocol is OSPF?,Link-state
+What type of protocol is BGP?,Path-vector
+What is AD of static route?,1
+What is route redistribution?,Injecting routes between protocols
+What is ECMP?,Equal-Cost Multi-Path routing
+What is a VLAN?,Logical segmentation into broadcast domains
+What is a trunk port?,Carries multiple VLANs via 802.1Q tags
+What is native VLAN?,"Untagged VLAN, default VLAN 1"
+What is STP used for?,Preventing Layer 2 loops
+What is a root bridge?,Central STP switch
+What is port security?,Limits MACs on a port
+What is BPDU guard?,Disables port if BPDUs received
+What is EtherChannel?,Bundling links for redundancy/bandwidth
+What is LACP?,Link Aggregation Control Protocol
+What is a broadcast domain?,All devices receiving broadcasts in Layer 2
+Key traits of 802.11a?,"5 GHz, 54 Mbps"
+Key traits of 802.11b?,"2.4 GHz, 11 Mbps"
+Key traits of 802.11g?,"2.4 GHz, 54 Mbps"
+Key traits of 802.11n?,"2.4/5 GHz, MIMO, 600 Mbps"
+Key traits of 802.11ac?,"5 GHz, MU-MIMO, gigabit+"
+Key traits of 802.11ax?,"Wi-Fi 6, OFDMA, 2.4/5/6 GHz"
+Which 2.4 GHz channels don’t overlap in US?,"1, 6, 11"
+What is WPA3?,Latest Wi-Fi security with SAE
+What is rogue AP?,Unauthorized access point
+What is site survey?,"Assess coverage, interference, placement"
+DNS record A?,IPv4 host
+DNS record AAAA?,IPv6 host
+DNS record MX?,Mail exchange
+DNS record CNAME?,Alias
+DHCPv4 steps acronym?,DORA
+What is NTP for?,Time sync
+What is AAA?,"Authentication, Authorization, Accounting"
+What is RADIUS?,AAA protocol UDP 1812/1813
+What is TACACS+?,AAA protocol TCP 49
+What is least privilege?,Grant only required access
+What is stateful firewall?,"Tracks sessions, allows return traffic"
+What is IDS?,Intrusion Detection System
+What is IPS?,Intrusion Prevention System
+What is VPN?,Encrypted tunnel
+What is IPsec ESP?,Encryption+authentication
+What is hashing used for?,Integrity verification
+Cat5e capability?,"1 Gbps, 100m"
+Cat6 capability?,"1 Gbps 100m, 10G 55m"
+Cat6a capability?,10 Gbps 100m
+Single-mode fiber?,"Long distance, laser"
+Multimode fiber?,"Short distance, LED/VCSEL"
+LC connector?,Small form-factor
+SC connector?,Square push-pull
+What is PoE?,Power over Ethernet
+What does ping test?,Connectivity via ICMP
+What does traceroute show?,Path to destination
+Which service uses TCP 587?,SMTP submission
+Which service uses TCP 993?,IMAP over SSL
+Which service uses TCP 995?,POP3 over SSL
+Which service uses TCP 636?,LDAPS
+Which service uses TCP 989/990?,FTPS
+Which service uses TCP 1720?,H.323
+Which service uses TCP 179?,BGP
+Which service uses UDP 1812/1813?,RADIUS
+Which service uses TCP 49?,TACACS+
+Which service uses UDP 514?,Syslog
+Which service uses UDP 69?,TFTP
+Which service uses UDP 500?,IPsec/IKE
+Which service uses UDP 4500?,IPsec NAT-T
+Which service uses UDP 1194?,OpenVPN
+Which service uses TCP 2049?,NFS
+How many usable hosts in /24?,254
+What is the subnet mask for /24?,255.255.255.0
+How many usable hosts in /23?,510
+What is the subnet mask for /23?,255.255.254.0
+How many usable hosts in /22?,1022
+What is the subnet mask for /22?,255.255.252.0
+How many usable hosts in /21?,2046
+What is the subnet mask for /21?,255.255.248.0
+How many usable hosts in /20?,4094
+What is the subnet mask for /20?,255.255.240.0
+What is IPv6 ULA prefix?,fc00::/7
+What is IPv6 global routing prefix?,2000::/3
+What is IPv6 anycast?,"Same address assigned to multiple nodes, routed to nearest"
+What is IPv6 multicast for DHCP?,ff02::1:2
+What is IPv6 duplicate address detection?,Process ensuring uniqueness
+What is IPv6 NDP used for?,Neighbor Discovery Protocol for ARP replacement
+What is OSPFv3?,OSPF for IPv6
+What is NAT64?,Translate IPv6 to IPv4
+What is split horizon?,Prevents loops by not advertising back on same interface
+What is poison reverse?,Route advertised as unreachable to avoid loops
+What is BGP transport protocol?,TCP 179
+What is an ASN?,Autonomous System Number
+What is EIGRP?,Advanced distance-vector protocol (Cisco)
+What is redistribution?,Sharing routes between protocols
+What is route summarization?,Aggregating routes into supernets
+What is default administrative distance of OSPF?,110
+What is default administrative distance of RIP?,120
+What is default administrative distance of EIGRP internal?,90
+What is RSTP?,"Rapid STP, faster convergence"
+What is MSTP?,"Multiple STP, 802.1s"
+What are STP port roles?,"Root, Designated, Alternate"
+What are classic STP port states?,"Blocking, Listening, Learning, Forwarding, Disabled"
+What are RSTP port states?,"Discarding, Learning, Forwarding"
+What is Root Guard?,Prevents a port from becoming root port
+What is Loop Guard?,Prevents alternate port from forwarding if BPDUs stop
+What is BPDU Filter?,Ignores BPDUs on a port
+What is VTP?,VLAN Trunking Protocol (Cisco)
+What is storm control?,Limits broadcast/multicast traffic
+What is 802.11r?,Fast roaming
+What is 802.11k?,Neighbor reports
+What is 802.11v?,Network-assisted roaming
+What is MU-MIMO?,Multiple users served simultaneously
+What is beamforming?,Directing RF signal towards client
+What is band steering?,Encouraging 5 GHz/6 GHz use
+What is WPA2?,Wi-Fi Protected Access 2
+What is WEP flaw?,"Weak RC4 encryption, insecure"
+What is EAP-TLS?,Certificate-based authentication
+What is PEAP?,Protected EAP with TLS tunnel
+DNS record PTR?,Reverse lookup
+DNS record SOA?,Start of Authority
+DNS record SRV?,Service location
+What is DHCP reservation?,Specific IP tied to MAC
+What is DHCP relay?,Forward DHCP across subnets
+What is NTP stratum 1?,Primary time source
+What is LDAP used for?,Directory services
+What is NGFW?,Next-Generation Firewall
+What is WAF?,Web Application Firewall
+What is UTM?,Unified Threat Management device
+What is DLP?,Data Loss Prevention
+What is SIEM?,Security Information and Event Management
+What is SOAR?,"Security Orchestration, Automation, Response"
+What is EDR?,Endpoint Detection and Response
+What is VPN split tunneling?,Only some traffic over VPN
+What is IPsec AH?,"Authentication Header, no encryption"
+What is SSL/TLS VPN?,VPN using TLS
+What is plenum-rated cable?,"Low smoke, fire resistant"
+What is riser-rated cable?,Vertical runs between floors
+What is bend radius?,Minimum safe cable curve
+What is NEXT?,Near-End Crosstalk
+What is FEXT?,Far-End Crosstalk
+What is ACR?,Attenuation to Crosstalk Ratio
+What is MPO/MTP?,Multi-fiber connector
+What is QSFP?,Quad Small Form-Factor Pluggable
+What is DAC cable?,Direct-Attach Copper
+What is OTDR?,Optical Time-Domain Reflectometer
+What does arp -a show?,ARP table
+What does netstat show?,Active connections
+What does nslookup/dig do?,DNS queries
+What is iperf used for?,Measure throughput
+What is mtr/pathping?,Trace path with stats
+What is cable tester?,Verify wiring
+What is tone generator?,Trace cables
+What is loopback plug?,Test NICs/ports
+What is ethtool?,Linux NIC settings
+What is escalation?,Hand off to higher support tier
+Which service uses TCP 3268?,Active Directory Global Catalog
+Which service uses TCP 3269?,Global Catalog over SSL
+Which service uses TCP 1434?,Microsoft SQL Server Browser
+Which service uses TCP 873?,rsync
+Which service uses TCP 6514?,Syslog over TLS
+Which service uses UDP 5353?,mDNS
+Which service uses UDP 1900?,SSDP/UPnP discovery
+Which service uses TCP 548?,Apple Filing Protocol (AFP)
+Which service uses TCP 427?,Service Location Protocol
+Which service uses UDP 69?,TFTP (lightweight file transfer)
+Which service uses TCP 465?,SMTPS (legacy secure SMTP)
+Which service uses UDP 514?,Syslog default port
+Which service uses TCP 8080?,Alternate HTTP port
+Which service uses TCP 8443?,Alternate HTTPS port
+Which service uses TCP/UDP 88?,Kerberos
+What is the wildcard mask for /24?,0.0.0.255
+What is the wildcard mask for /25?,0.0.0.127
+What is the wildcard mask for /26?,0.0.0.63
+What is the wildcard mask for /27?,0.0.0.31
+What is the wildcard mask for /28?,0.0.0.15
+What is IPv6 loopback address?,::1
+What is IPv6 anycast used for?,"Address shared by devices, routes to nearest"
+What is IPv6 dual stack?,Running IPv4 and IPv6 together
+What is IPv6 tunneling?,Encapsulating IPv6 in IPv4
+What is BGP primarily used for?,Routing between autonomous systems (Internet)
+What is OSPF area 0?,Backbone area
+What is ABR in OSPF?,Area Border Router
+What is ASBR in OSPF?,Autonomous System Boundary Router
+What is a stub area in OSPF?,Area blocking external routes
+What is default AD of connected route?,0
+What is floating static route?,Static with higher AD for backup
+What is route flapping?,Route constantly up and down
+What is hold-down timer?,Prevents flapping route reinstallation
+What is BGP path selection priority?,"Highest weight, then local pref, then AS path, etc."
+What is CAM table overflow?,Attack filling MAC table forcing flooding
+What is DHCP snooping?,Blocks rogue DHCP servers
+What is Dynamic ARP Inspection?,Validates ARP packets against bindings
+What is IP source guard?,Filters traffic based on IP/MAC bindings
+What is microsegmentation?,Per-port switching for isolation
+What is CDP?,Cisco Discovery Protocol
+What is LLDP?,Vendor-neutral discovery protocol
+What is voice VLAN?,Dedicated VLAN for VoIP with QoS
+What is trunk native VLAN mismatch?,Different native VLANs causing leaks
+What is SPAN port?,Mirror port for analysis
+What is Wi-Fi 6E?,802.11ax extended to 6 GHz
+What is Wi-Fi 7?,"802.11be with MLO, 320 MHz channels"
+What is OFDMA?,Orthogonal Frequency Division Multiple Access
+What is RSSI?,Received Signal Strength Indicator
+What is SNR?,Signal-to-Noise Ratio
+What is DFS channel?,Dynamic Frequency Selection avoids radar
+What is deauth attack?,Spoofed deauth frames kicking clients
+What is WPA2 flaw?,Susceptible to KRACK attacks
+What is PMF (802.11w)?,Protected Management Frames
+What is EAP-TTLS?,EAP with tunneled TLS
+What is DNS TTL?,Time to live for cache
+What is DNS forwarder?,Server that forwards queries
+What is DNS recursive query?,Resolver queries other servers fully
+What is iterative DNS?,Server responds with referral
+What is DNSSEC?,Security for DNS integrity
+What is DHCP option 3?,Default gateway
+What is DHCP option 6?,DNS servers
+What is phishing?,Tricking users into giving info
+What is spear phishing?,Targeted phishing
+What is whaling?,Phishing targeting executives
+What is vishing?,Voice phishing
+What is smishing?,SMS phishing
+What is shoulder surfing?,Stealing info by looking at screen
+What is tailgating?,Following someone into secure area
+What is ARP poisoning?,Sending fake ARP replies
+What is DNS poisoning?,Corrupting DNS cache
+What is rogue DHCP server?,Unauthorized DHCP giving bad IPs
+What is riser cable?,Cable for vertical shafts
+What is patch panel?,Organizes cable terminations
+What is punchdown block?,Termination for twisted pair
+What is time-domain reflectometer (TDR)?,Test copper cable faults
+What is optical TDR?,Test fiber faults
+What is tone generator/probe?,Trace cables
+What is cable certifier?,Test cable to standards
+What is MPO polarity?,Correct mapping of multi-fiber strands
+What is AOC?,Active Optical Cable
+What is bend radius important for?,Prevent signal loss/damage
+What does route print show?,Windows routing table
+What does ip route show?,Linux routing table
+What does ipconfig /flushdns do?,Clears DNS cache
+What does ipconfig /release and /renew do?,Refresh DHCP lease
+What does pathping do?,Trace route with packet loss info
+What is netstat used for?,Shows active sessions
+What is tcpdump used for?,Packet capture CLI tool
+What is log analysis?,Review logs to detect issues
+What is escalation?,Hand issue to higher support tier
+What is post-mortem?,After-incident review
+What is DSLAM?,Device aggregating DSL lines
+What is DOCSIS?,Cable modem standard
+What is LTE?,4G cellular
+What is CIR?,Committed Information Rate in WAN
+What is SAN?,Storage Area Network
+What is NAS?,Network Attached Storage
+What is iSCSI?,SCSI over IP
+What is Fibre Channel?,High-speed SAN protocol
+What is patch management?,Applying updates/fixes
+Which service uses TCP 1433?,Microsoft SQL Server
+Which service uses TCP 1521?,Oracle SQL*Net
+Which service uses TCP 3306?,MySQL/MariaDB
+Which service uses TCP 563?,NNTP over TLS
+Which service uses UDP 5004/5005?,RTP/RTCP
+Which service uses TCP 25 vs 587?,"25 relay, 587 submission"
+Which service uses TCP 993 vs 143?,"993 IMAP over SSL, 143 IMAP"
+Which service uses TCP 995 vs 110?,"995 POP3 over SSL, 110 POP3"
+Which service uses TCP 22?,"SSH, SFTP, SCP"
+Which service uses TCP 3389?,Remote Desktop Protocol
+Which service uses UDP 161?,SNMP queries
+Which service uses UDP 162?,SNMP traps
+Which service uses TCP 80 vs 443?,HTTP vs HTTPS
+Which service uses TCP 389 vs 636?,LDAP vs LDAPS
+How many usable hosts in /19?,8190
+What is the subnet mask for /19?,255.255.224.0
+How many usable hosts in /18?,16382
+What is the subnet mask for /18?,255.255.192.0
+How many usable hosts in /17?,32766
+What is the subnet mask for /17?,255.255.128.0
+How many usable hosts in /16?,65534
+What is the subnet mask for /16?,255.255.0.0
+How many usable hosts in /15?,131070
+What is the subnet mask for /15?,255.254.0.0
+What is IPv6 multicast all-DHCP agents?,ff05::1:3
+What is IPv6 link-local scope?,fe80::/10
+What is IPv6 anycast?,Address to nearest node
+What is IPv6 router solicitation?,RS message to find routers
+What is IPv6 router advertisement?,RA message from router
+What is IPv6 neighbor solicitation?,NS message to resolve address
+What is RIP max hop count?,15
+What is OSPFv2 used for?,IPv4 routing
+What is OSPFv3 used for?,IPv6 routing
+What is BGP attribute AS_PATH?,Path length of AS numbers
+What is BGP attribute LOCAL_PREF?,Preference within AS
+What is OSPF metric?,"Cost, based on bandwidth"
+What is EIGRP metric?,Bandwidth and delay
+What is HSRP?,Hot Standby Router Protocol (Cisco)
+What is VRRP?,Virtual Router Redundancy Protocol
+What is GLBP?,Gateway Load Balancing Protocol
+What is VLAN hopping?,Attack moving traffic between VLANs
+What is root bridge election based on?,Lowest bridge ID (priority+MAC)
+What is path cost in STP based on?,Link speed
+What is EtherChannel negotiation protocols?,LACP and PAgP
+What is VTP pruning?,Limit VLAN traffic on trunks
+What is UDLD?,Unidirectional Link Detection
+What is portfast used for?,Fast transition to forwarding
+What is BPDU filter?,Stop sending/receiving BPDUs
+What is loop guard?,Prevent forwarding if BPDUs stop
+What is storm control?,Limit broadcast/multicast traffic
+What is WPA2?,Wi-Fi Protected Access 2 with AES
+What is WPA flaw?,TKIP vulnerabilities
+What is 802.11d?,Adds regulatory domain support
+What is 802.11e?,QoS for Wi-Fi
+What is 802.11h?,DFS and TPC for 5 GHz
+What is 802.11i?,Defines WPA2 security
+What is 802.11ax?,Wi-Fi 6 with OFDMA
+What is 802.11be?,Wi-Fi 7 with MLO
+What is site survey output?,Heatmaps of coverage
+What is EAP-MSCHAPv2?,EAP with Microsoft auth protocol
+What is DNS SRV record?,Specifies service location
+What is DNS TXT record?,"Arbitrary text, SPF/DKIM"
+What is DNS NS record?,Authoritative name server
+What is DHCP scope?,Range of IP addresses for clients
+What is DHCP option 15?,Domain name
+What is DHCPv6 port numbers?,"546 client, 547 server"
+What is syslog used for?,Central log collection
+What is MAC filtering?,Limit devices by MAC (weak security)
+What is port security violation modes?,"Protect, restrict, shutdown"
+What is defense in depth?,Multiple security layers
+What is principle of least privilege?,Only needed access
+What is geofencing?,Location-based access control
+What is port knocking?,Hidden sequence to open ports
+What is honeypot?,Decoy system
+What is honeynet?,Network of honeypots
+What is IDS vs IPS?,Detect vs prevent
+What is anomaly-based detection?,Looks for unusual behavior
+What is Cat7 spec?,"Shielded, higher frequencies"
+What is Cat8 spec?,25/40 Gbps short distance
+What is 1000BASE-SX?,Gigabit over MMF
+What is 1000BASE-LX?,Gigabit over SMF
+What is 10GBASE-T?,10 Gig over copper
+What is 40GBASE-SR4?,40 Gig over MMF
+What is 100GBASE-LR4?,100 Gig over SMF
+What is SFP?,1G transceiver
+What is SFP+?,10G transceiver
+What is QSFP?,40G/100G transceiver
+What does show ip route do?,Displays routing table (Cisco)
+What does show interfaces do?,Interface status
+What does show mac address-table do?,Displays MAC table
+What is tcpdump?,Packet capture CLI tool
+What is Wireshark?,Graphical packet analyzer
+What is netcat (nc)?,Network utility for reading/writing
+What is nmap?,Port scanner
+What is escalation path?,Procedure for handing off issues
+Which service uses TCP 5000-5001?,RTSP alternate ports
+Which service uses UDP 161/162?,SNMP queries/traps
+Which service uses UDP 67 vs 68?,DHCP server vs client
+Which service uses UDP 546/547?,DHCPv6 client/server
+Which service uses TCP 22?,SCP (secure copy)
+Which service uses UDP 137-139?,NetBIOS services
+Which service uses TCP 445?,SMB/CIFS file sharing
+Which service uses TCP 1434?,SQL Server Browser
+Which service uses TCP 1521?,Oracle Net Listener
+Which service uses UDP 1701?,L2TP
+Which service uses UDP 1812/1813?,RADIUS auth/accounting
+How many usable hosts in /14?,262142
+What is the subnet mask for /14?,255.252.0.0
+How many usable hosts in /13?,524286
+What is the subnet mask for /13?,255.248.0.0
+How many usable hosts in /12?,1048574
+What is the subnet mask for /12?,255.240.0.0
+How many usable hosts in /11?,2097150
+What is the subnet mask for /11?,255.224.0.0
+How many usable hosts in /10?,4194302
+What is the subnet mask for /10?,255.192.0.0
+What is IPv6 link-local importance?,Required for neighbor communication
+What is IPv6 scope ID?,Interface identifier for link-local
+What is IPv6 unique local use?,Private addressing like IPv4 RFC1918
+What is IPv6 NAT64?,Translate IPv6 to IPv4
+What is IPv6 Teredo?,Tunneling IPv6 through IPv4 UDP
+What is IPv6 ISATAP?,IPv6 tunneling method within IPv4
+What is IPv6 EUI-64?,Create interface ID from MAC address
+What is IPv6 DAD?,Duplicate Address Detection
+What is IPv6 NDP?,Neighbor Discovery Protocol
+What is IPv6 ICMPv6?,Error reporting and diagnostics
+What is default AD of directly connected route?,0
+What is default AD of static route?,1
+What is default AD of OSPF?,110
+What is default AD of RIP?,120
+What is default AD of BGP external?,20
+What is default AD of BGP internal?,200
+What is route summarization?,Aggregating routes into a supernet
+What is floating static route?,Backup static with higher AD
+What is default AD of EIGRP internal?,90
+What is default AD of EIGRP external?,170
+What is VLAN trunking protocol (Cisco)?,VTP
+What is VLAN trunking standard?,802.1Q
+What is root bridge election criteria?,Lowest bridge ID
+What is STP BPDU?,Bridge Protocol Data Unit
+What is portfast used for?,Quick forwarding for end devices
+What is BPDU guard used for?,Disables PortFast port on BPDU
+What is loop guard used for?,Protects against unidirectional link loops
+What is storm control used for?,Prevents broadcast/multicast floods
+What is native VLAN?,Untagged VLAN on trunk
+What is trunk allowed VLAN list?,Restrict VLANs on trunk
+What is WPA flaw?,Weak TKIP
+What is WEP flaw?,Weak RC4
+What is WPA2 improvement?,AES/CCMP
+What is WPA3 SAE?,Simultaneous Authentication of Equals
+What is EAP?,Extensible Authentication Protocol
+What is PEAP?,Protected EAP
+What is EAP-TLS?,Certificate-based EAP
+What is 802.11w?,Protected Management Frames
+What is 802.11e?,QoS enhancements
+What is band steering?,Encourage clients to use 5/6 GHz
+What is DNS zone transfer?,Copy DNS records between servers
+What is DNS forward lookup zone?,Resolves names to IP addresses
+What is DNS reverse lookup zone?,Resolves IP to names
+What is DHCP lease time?,How long client keeps IP
+What is DHCP conflict detection?,Ping before lease to avoid duplicate
+What is NTP Stratum 1?,Primary time source
+What is syslog severity 0?,Emergency
+What is RADIUS?,Central AAA protocol
+What is TACACS+?,Cisco AAA protocol
+What is SIEM?,Security Info and Event Mgmt
+What is phishing?,Generic email attack
+What is spear phishing?,Targeted email attack
+What is whaling?,Exec-level phishing attack
+What is tailgating?,Unauthorized entry by following someone
+What is shoulder surfing?,Stealing info by watching screen
+What is Cat5e spec?,"1 Gbps, 100m"
+What is Cat6a spec?,"10 Gbps, 100m"
+What is Cat7 spec?,"Shielded, higher freq"
+What is Cat8 spec?,"25-40 Gbps, short DC"
+What is 100BASE-TX?,Fast Ethernet over Cat5
+What is 1000BASE-T?,Gigabit over copper
+What does show cdp neighbors do?,Displays Cisco neighbors
+What does show lldp neighbors do?,Displays LLDP neighbors
+What does show ip interface brief do?,Cisco command for IP/interface status
+What does ping -t do?,Continuous ping (Windows)
+What is traceroute -6 do?,Trace IPv6 path
+What is dig used for?,DNS queries (Linux/Unix)
