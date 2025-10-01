@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CompTIA A+ 220-1201 (Core 1) Practice Quiz — 90 Questions</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
+    body { margin: 24px; background: #f7f7fb; color: #1f2937; }
+    .app { max-width: 980px; margin: 0 auto; }
+    header { margin-bottom: 16px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size: 12px; margin-right:6px; }
+    .card { background:white; border-radius:14px; padding:20px; box-shadow: 0 6px 24px rgba(0,0,0,.06); margin: 14px 0; }
+    .q { font-weight: 600; margin-bottom: 10px; }
+    .choices { list-style: none; padding:0; margin:0; display:grid; gap:8px; }
+    .choices li { border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; cursor:pointer; background:#fff; }
+    .choices li.correct { border-color:#16a34a; background:#ecfdf5; }
+    .choices li.incorrect { border-color:#dc2626; background:#fef2f2; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .btn { background:#111827; color:#fff; padding:10px 14px; border:none; border-radius:10px; cursor:pointer; }
+    .btn:disabled{ opacity:.5; cursor:not-allowed; }
+    .muted { color:#6b7280; font-size: 12px }
+    .tag { padding:2px 8px; background:#f1f5f9; border-radius:999px; font-size:12px; color:#334155; }
+    .score { font-size: 18px; font-weight:700; }
+    details summary { cursor:pointer; }
+    .domain { font-weight:700; color:#0f172a; }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>CompTIA A+ 220-1201 (Core 1) Practice Quiz</h1>
+    <div class="muted">90 questions • Domains weighted roughly to 220-1201: Mobile (13%), Networking (23%), Hardware (25%), Virtualization & Cloud (11%), HW/Net Troubleshooting (28%).</div>
+    <div style="margin-top:8px;">
+      <span class="pill">Mobile Devices</span>
+      <span class="pill">Networking</span>
+      <span class="pill">Hardware</span>
+      <span class="pill">Virtualization & Cloud</span>
+      <span class="pill">Troubleshooting</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="row">
+      <button id="start" class="btn">Start quiz</button>
+      <button id="shuffle" class="btn">Shuffle</button>
+      <button id="reset" class="btn" disabled>Reset</button>
+      <div class="score" id="scoreBoard">Score: 0/0</div>
+    </div>
+  </section>
+
+  <div id="quiz"></div>
+
+  <section class="card">
+    <h2>Answer Key</h2>
+    <details>
+      <summary>Show/Hide key</summary>
+      <ol id="key"></ol>
+    </details>
+  </section>
+
+  <footer class="muted">Created for study purposes. Not affiliated with CompTIA.</footer>
+</div>
+
+<script>
+/**
+ * 90 questions distributed by domain in line with 220-1201 Core 1.
+ * Each item: { q, c: [choices], a: index(0-3), d: domainTag }
+ */
+const Q = [
+  // -------------------- Mobile Devices (12) --------------------
+  {q:"Which wireless technology is commonly used for contactless mobile payments?", c:["NFC","ANT+","Zigbee","Z-Wave"], a:0, d:"Mobile"},
+  {q:"A user wants a laptop with the best battery life when idle. Which display technology typically uses the least power with dark themes?", c:["TN LCD","IPS LCD","OLED","CCFL LCD"], a:2, d:"Mobile"},
+  {q:"Which component in a smartphone is most responsible for device orientation detection?", c:["Gyroscope/accelerometer","Proximity sensor","Magnetometer","Barometer"], a:0, d:"Mobile"},
+  {q:"You need to share a phone's Internet with a laptop over USB. Which feature is used?", c:["Bluetooth PAN","Hotspot","Tethering","AirDrop"], a:2, d:"Mobile"},
+  {q:"A user complains their tablet only charges one way and the port is slightly loose. Which port is most likely?", c:["USB-C","Micro-USB","Lightning","Mini-USB"], a:1, d:"Mobile"},
+  {q:"Which laptop storage offers the highest drop resistance and lowest latency?", c:["7200 RPM HDD","SATA SSD (2.5\")","NVMe M.2 SSD","Hybrid SSHD"], a:2, d:"Mobile"},
+  {q:"Which laptop feature disables keyboard/trackpad input while presenting?", c:["Fn lock","Airplane mode","PalmCheck / smart-sense","NumLock"], a:2, d:"Mobile"},
+  {q:"A stylus that supports pressure and tilt likely uses which technology with compatible tablets?", c:["Resistive touch","Active digitizer","IR touch grid","Capacitive only"], a:1, d:"Mobile"},
+  {q:"Which setting most reduces a smartphone's cellular data use on the go?", c:["Wi‑Fi calling","Disable MMS","Enable Low Data Mode","Disable NFC"], a:2, d:"Mobile"},
+  {q:"A user travels internationally and wants best voice quality over hotel Wi‑Fi with minimal data. Which option?", c:["Wi‑Fi calling","Bluetooth calling","SMS over IMS","NFC voice"], a:0, d:"Mobile"},
+  {q:"Which component is MOST user‑replaceable in modern ultrabooks?", c:["RAM","CPU","Battery module","M.2 SSD"], a:3, d:"Mobile"},
+  {q:"A laptop shows washed‑out colors at angles. Which LCD type is it likely using?", c:["IPS","VA","TN","OLED"], a:2, d:"Mobile"},
+
+  // -------------------- Networking Technologies (21) --------------------
+  {q:"Which device operates at OSI Layer 3 to connect multiple networks?", c:["Hub","Switch","Router","Bridge"], a:2, d:"Networking"},
+  {q:"What is the default gateway primarily used for on a workstation?", c:["Resolving hostnames","Forwarding traffic to other networks","Assigning IP addresses","Blocking broadcast storms"], a:1, d:"Networking"},
+  {q:"Which wireless standard first introduced MU‑MIMO widely in the consumer space?", c:["802.11n","802.11ac","802.11g","802.11a"], a:1, d:"Networking"},
+  {q:"Which cable type is immune to EMI and supports long distances?", c:["Cat 6 UTP","Cat 6a STP","Multimode fiber","Coax RG‑6"], a:2, d:"Networking"},
+  {q:"A PC needs a static IP but must be outside the DHCP pool of 192.168.1.100‑199. Which IP is appropriate?", c:["192.168.1.50","192.168.1.150","192.168.1.175","192.168.2.10"], a:0, d:"Networking"},
+  {q:"Which DNS record maps a hostname to an IPv4 address?", c:["AAAA","MX","CNAME","A"], a:3, d:"Networking"},
+  {q:"What protocol automatically assigns IP addresses on a small SOHO network?", c:["DNS","NAT","DHCP","SNMP"], a:2, d:"Networking"},
+  {q:"Which technology translates private IPs to a public IP for Internet access?", c:["PAT (NAT overload)","Subnetting","VLAN","Port forwarding"], a:0, d:"Networking"},
+  {q:"What is the typical maximum segment length for 1000Base‑T over copper?", c:["55 m","90 m","100 m","305 m"], a:2, d:"Networking"},
+  {q:"Which frequency band offers better wall penetration but lower max throughput in Wi‑Fi?", c:["2.4 GHz","5 GHz","6 GHz","60 GHz"], a:0, d:"Networking"},
+  {q:"Which tool tests network path latency and packet loss hop‑by‑hop?", c:["ping","traceroute","nslookup","ipconfig"], a:1, d:"Networking"},
+  {q:"A technician needs to separate office and guest traffic on the same switch. Which feature?", c:["QoS","PoE","VLAN","Port mirroring"], a:2, d:"Networking"},
+  {q:"Which connector is standard on twisted‑pair Ethernet patch cables?", c:["RJ11","LC","ST","RJ45"], a:3, d:"Networking"},
+  {q:"Which addressing scheme allows multiple networks inside 10.0.0.0/8?", c:["Supernetting","Subnetting","NAT","APIPA"], a:1, d:"Networking"},
+  {q:"A user reports intermittent Wi‑Fi drops near a microwave. Which band is most affected?", c:["2.4 GHz","5 GHz","6 GHz","60 GHz"], a:0, d:"Networking"},
+  {q:"Which service resolves hostnames to IPs on the local machine using a fallback text file?", c:["DHCP","Hosts file","LMHOSTS only","mDNS only"], a:1, d:"Networking"},
+  {q:"What address range is APIPA?", c:["169.254.0.0/16","172.16.0.0/12","192.168.0.0/16","100.64.0.0/10"], a:0, d:"Networking"},
+  {q:"Which WAN technology uses phone lines with 64‑kbps channels and is legacy?", c:["DSL","ISDN BRI","Cable","MPLS"], a:1, d:"Networking"},
+  {q:"You need to power an IP camera over Ethernet. Which standards apply?", c:["802.3u","802.3af/at","802.11af","802.1X"], a:1, d:"Networking"},
+  {q:"Which command releases and renews a Windows DHCP lease?", c:["ipconfig /flushdns","ipconfig /release && ipconfig /renew","arp -d *","netstat -rn"], a:1, d:"Networking"},
+  {q:"A company wants to prioritize VoIP traffic. Which feature should be configured?", c:["Port trunking","QoS","Spanning Tree","RADIUS"], a:1, d:"Networking"},
+
+  // -------------------- Hardware (23) --------------------
+  {q:"Which connector supplies additional 12V power to a modern CPU on the motherboard?", c:["PCIe 8‑pin","ATX12V 4/8‑pin","Molex","SATA power"], a:1, d:"Hardware"},
+  {q:"You need the fastest consumer internal storage interface. Choose:", c:["SATA III 6 Gbps","NVMe over PCIe","USB 3.2 Gen 1","SAS 12 Gbps"], a:1, d:"Hardware"},
+  {q:"Which RAM type is used in laptops?", c:["DIMM","SODIMM","RIMM","SRAM"], a:1, d:"Hardware"},
+  {q:"A customer wants a RAID that survives one disk failure with minimal cost. Which level?", c:["RAID 0","RAID 1","RAID 5","RAID 10"], a:2, d:"Hardware"},
+  {q:"Which port is commonly used for external displays and supports daisy‑chaining?", c:["HDMI","VGA","DisplayPort","DVI‑D"], a:2, d:"Hardware"},
+  {q:"Thermal paste is applied between which two components?", c:["CPU and heatsink","GPU and VRAM","PSU and case","Chipset and fan"], a:0, d:"Hardware"},
+  {q:"Which is a typical sign of a failing PSU?", c:["Single long POST beep","Random reboots under load","Dead pixels","Slow file copies only"], a:1, d:"Hardware"},
+  {q:"A user needs to add 2.5\" SATA storage to a desktop without free 3.5\" bays. What else is required?", c:["M.2 adapter","2.5\" to 3.5\" bracket","PCIe riser","NVMe to USB"], a:2, d:"Hardware"},
+  {q:"Which connector is keyed and used for SATA data?", c:["L‑shaped 7‑pin","15‑pin flat","4‑pin Molex","Mini‑Fit Jr"], a:0, d:"Hardware"},
+  {q:"ECC memory is MOST likely required in which system?", c:["Gaming PC","SOHO NAS","Workstation/Server","HTPC"], a:2, d:"Hardware"},
+  {q:"Which printer type uses a fuser assembly?", c:["Inkjet","Laser","Thermal","Impact"], a:1, d:"Hardware"},
+  {q:"Which display issue is most associated with a failing backlight in older LCDs?", c:["Color banding","Dim screen with flashlight test","Burn‑in","Overscan"], a:1, d:"Hardware"},
+  {q:"Which expansion slot is common for modern GPUs?", c:["PCI","PCI‑X","AGP","PCIe x16"], a:3, d:"Hardware"},
+  {q:"Which connector is used by most CPU coolers for speed control?", c:["2‑pin DC","3‑pin DC","4‑pin PWM","Molex"], a:2, d:"Hardware"},
+  {q:"Which term describes a monitor’s ability to match the number of frames coming from a GPU?", c:["HDR","Adaptive sync","Scaling","G‑to‑G"], a:1, d:"Hardware"},
+  {q:"You need to attach many USB devices and charge them. Which hub feature matters most?", c:["USB‑C shape","Powered hub","OTG","Thunderbolt"], a:1, d:"Hardware"},
+  {q:"Which cable is BEST for 10GBase‑T at 100 m?", c:["Cat 6","Cat 6a","Cat 5e","Cat 7 only"], a:1, d:"Hardware"},
+  {q:"Which connector is used by SFP+ transceivers for fiber?", c:["SC","LC","ST","RJ45"], a:1, d:"Hardware"},
+  {q:"A user wants the highest color accuracy for photo editing. Which panel type?", c:["TN","IPS","VA","CRT"], a:1, d:"Hardware"},
+  {q:"Which port is commonly used for KVM‑over‑IP appliances to manage servers out of band?", c:["Serial (RJ45/DB9)","AUX on switch","HDMI ARC","Audio line‑in"], a:0, d:"Hardware"},
+  {q:"Which label indicates a PSU’s real capability to handle brief surges?", c:["Efficiency %","80 PLUS tier","Peak vs. continuous wattage","Fan size"], a:2, d:"Hardware"},
+  {q:"Which device converts AC to DC rails for a PC?", c:["VRM","PSU","UPS","Inverter"], a:1, d:"Hardware"},
+  {q:"Which connector is used to provide power to 3.5\" HDDs in modern PCs?", c:["Molex 4‑pin","SATA 15‑pin","Berg","P8/P9"], a:1, d:"Hardware"},
+
+  // -------------------- Virtualization & Cloud (10) --------------------
+  {q:"Which scenario BEST fits IaaS?", c:["Managed email service","Virtual machines with customer‑managed OS","CRM SaaS app","Serverless function"], a:1, d:"Virt/Cloud"},
+  {q:"Which feature allows a VM to use a host’s physical CPU efficiently across guests?", c:["Hardware virtualization support","Nested paging only","Para‑virtual drivers only","UEFI Secure Boot"], a:0, d:"Virt/Cloud"},
+  {q:"A small business wants a cloud model shared by several organizations with common goals. Which model?", c:["Public","Private","Community","Hybrid"], a:2, d:"Virt/Cloud"},
+  {q:"Snapshots are primarily used for what?", c:["Permanent backups","Quick rollback points","Live migration","License tracking"], a:1, d:"Virt/Cloud"},
+  {q:"Which term describes adding more VMs across multiple hosts to handle load?", c:["Vertical scaling","Horizontal scaling","Over‑provisioning","Throttling"], a:1, d:"Virt/Cloud"},
+  {q:"Which cloud principle lets you pay for precisely the resources consumed?", c:["Elasticity","Metered service","Rapid elasticity","Resource pooling"], a:1, d:"Virt/Cloud"},
+  {q:"A developer needs event‑driven code without managing servers. Which model?", c:["PaaS containers","SaaS","Serverless (FaaS)","IaaS only"], a:2, d:"Virt/Cloud"},
+  {q:"What’s the main advantage of VDI for a call center?", c:["Lower GPU needs on endpoints","Always‑on VPN","Users own local admin","No network needed"], a:0, d:"Virt/Cloud"},
+  {q:"Which technology shares a physical NIC among multiple VMs?", c:["vSwitch / virtual NICs","NAT only","Bridged USB","RDP"], a:0, d:"Virt/Cloud"},
+  {q:"Which is MOST associated with cloud bursting?", c:["Expanding to public cloud during spikes","Expanding storage in same rack","Moving entirely to private cloud","Local backup to tape"], a:0, d:"Virt/Cloud"},
+
+  // -------------------- HW & Network Troubleshooting (24) --------------------
+  {q:"A PC powers on but there’s no video and POST beeps indicate RAM. First step?", c:["Replace PSU","Reseat memory","Replace CPU","Update BIOS"], a:1, d:"Troubleshoot"},
+  {q:"A laser printer has faint print across the page. Likely cause?", c:["Low toner","Duplexer issue","Bad transfer belt","Wrong paper size"], a:0, d:"Troubleshoot"},
+  {q:"User cannot reach any external websites but can reach local servers by IP. Likely issue?", c:["DNS outage","Default gateway down","DHCP scope full","Bad patch cable"], a:0, d:"Troubleshoot"},
+  {q:"Laptop keyboard registers multiple characters per press. Best quick fix?", c:["Replace keyboard","Toggle Filter Keys","Clean under keycaps","External USB keyboard only"], a:2, d:"Troubleshoot"},
+  {q:"A PC randomly shuts down under high GPU load. Most likely?", c:["Failing HDD","Underpowered PSU/overheating","Wrong drivers","Stuck pixel"], a:1, d:"Troubleshoot"},
+  {q:"Pages smudge right off after printing on a laser printer. Which assembly?", c:["Pickup rollers","Fuser","Imaging drum","Transfer roller"], a:1, d:"Troubleshoot"},
+  {q:"An AP shows many CRC errors. First action?", c:["Change channel / reduce interference","Replace AP","Lower transmit power","Disable WPA3"], a:0, d:"Troubleshoot"},
+  {q:"Workstation has 169.254.x.x address. Which step?", c:["Check DHCP server and renew","Flush DNS","Change subnet mask","Enable 802.1X"], a:0, d:"Troubleshoot"},
+  {q:"A mechanical HDD makes clicking sounds and SMART shows reallocated sectors. Best action?", c:["Run defrag","Low‑level format","Back up immediately and replace","Ignore until fails"], a:2, d:"Troubleshoot"},
+  {q:"No POST, fans spin, motherboard shows CPU LED. Next step?", c:["Reapply thermal paste","Reseat/verify CPU and power leads","Replace GPU","Swap RAM slots"], a:1, d:"Troubleshoot"},
+  {q:"Users on one switch can’t reach VLAN 20. Others can. Likely cause?", c:["DNS issue","Trunk misconfiguration","DHCP down","APIPA"], a:1, d:"Troubleshoot"},
+  {q:"Laptop Wi‑Fi is connected but \"No Internet\". Others OK. First local step?", c:["Reset TCP/IP stack","Replace router","Change SSID","Disable DHCP"], a:0, d:"Troubleshoot"},
+  {q:"Inkjet print shows horizontal white lines. Likely fix?", c:["Replace fuser","Run printhead cleaning/alignment","Change transfer belt","Use glossy paper"], a:1, d:"Troubleshoot"},
+  {q:"A user reports ghosting on a laser printer. Likely cause?", c:["Duplexer","High humidity","Dirty or failing drum","Wrong paper size"], a:2, d:"Troubleshoot"},
+  {q:"Network loop causes broadcast storm. Which feature prevents this?", c:["QoS","STP","NAT","MTU"], a:1, d:"Troubleshoot"},
+  {q:"A PC can reach gateway but not a specific remote site while others can. What next?", c:["Check host file and DNS","Replace NIC","Swap switch","Change subnet mask"], a:0, d:"Troubleshoot"},
+  {q:"After RAM upgrade, system only sees half the memory. Likely reason?", c:["Wrong RAM speed","Mixed ECC/non‑ECC or channel mismatch","GPU bottleneck","UEFI Secure Boot"], a:1, d:"Troubleshoot"},
+  {q:"Laptop battery shows 100% but shuts off when AC unplugged. Most likely?", c:["Bad DC‑in jack","Battery wear/failure","Bad charger","Overheating"], a:1, d:"Troubleshoot"},
+  {q:"Newly installed NVMe not detected. First BIOS setting to check?", c:["Legacy CSM","SATA mode AHCI","PCIe/NVMe support & slot mapping","VT‑x"], a:2, d:"Troubleshoot"},
+  {q:"Users complain of slow Wi‑Fi at lunch. Best mitigation?", c:["Move to 2.4 GHz","Increase channel width only","Deploy additional APs/capacity planning","Disable band steering"], a:2, d:"Troubleshoot"},
+  {q:"PC throws \"Inaccessible Boot Device\" after cloning to NVMe. Likely fix?", c:["Install proper storage controller drivers","Replace GPU","Reinstall printer","Change monitor cable"], a:0, d:"Troubleshoot"},
+  {q:"One user cannot reach any internal host by name but IP works; others fine. Likely local fix?", c:["Set correct DNS server","Replace gateway","Change VLAN","Disable IPv6"], a:0, d:"Troubleshoot"},
+  {q:"A display shows \"Input not supported\" after changing resolution. Immediate action?", c:["Boot Safe Mode and lower resolution","Replace GPU","Replace cable","Reset BIOS"], a:0, d:"Troubleshoot"},
+  {q:"Thin client can’t connect to VDI broker; network good. Next?", c:["Check broker URL/certs and credentials","Replace monitor","Add RAM","Change VLAN to 1"], a:0, d:"Troubleshoot"},
+];
+
+const quizEl = document.getElementById('quiz');
+const keyEl = document.getElementById('key');
+const scoreBoard = document.getElementById('scoreBoard');
+let answered = 0, correct = 0;
+
+function render(questions){
+  quizEl.innerHTML = '';
+  keyEl.innerHTML = '';
+  answered = 0; correct = 0; updateScore();
+  questions.forEach((it, idx) => {
+    const card = document.createElement('div'); card.className = 'card';
+    const meta = document.createElement('div');
+    meta.innerHTML = `<span class="tag">#${idx+1}</span> <span class="tag domain">${it.d}</span>`;
+    const q = document.createElement('div'); q.className = 'q'; q.textContent = it.q;
+    const ul = document.createElement('ul'); ul.className = 'choices';
+
+    it.c.forEach((text, i) => {
+      const li = document.createElement('li'); li.textContent = String.fromCharCode(65+i) + '. ' + text;
+      li.addEventListener('click', () => {
+        if (li.classList.contains('correct') || li.classList.contains('incorrect')) return;
+        const wasCorrect = (i === it.a);
+        [...ul.children].forEach((s, j) => {
+          if (j === it.a) s.classList.add('correct');
+          else if (s === li) s.classList.add('incorrect');
+        });
+        answered++; if (wasCorrect) correct++; updateScore();
+      });
+      ul.appendChild(li);
+    });
+
+    card.appendChild(meta); card.appendChild(q); card.appendChild(ul);
+    quizEl.appendChild(card);
+
+    const liKey = document.createElement('li');
+    liKey.textContent = `Q${idx+1}: ${String.fromCharCode(65+it.a)} (${it.d})`;
+    keyEl.appendChild(liKey);
+  });
+}
+
+function updateScore(){ scoreBoard.textContent = `Score: ${correct}/${answered}`; }
+
+function shuffle(array){
+  for (let i = array.length -1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// controls
+const startBtn = document.getElementById('start');
+const shuffleBtn = document.getElementById('shuffle');
+const resetBtn = document.getElementById('reset');
+
+startBtn.addEventListener('click', ()=>{ render(Q); resetBtn.disabled = false; });
+shuffleBtn.addEventListener('click', ()=>{ const copy = [...Q]; shuffle(copy); render(copy); resetBtn.disabled = false; });
+resetBtn.addEventListener('click', ()=>{ render(Q); });
+</script>
+</body>
+</html>
