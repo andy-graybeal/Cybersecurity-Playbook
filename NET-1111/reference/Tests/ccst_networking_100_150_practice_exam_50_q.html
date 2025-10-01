@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CCST Networking (100-150) Practice Exam — 50 Questions</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans'; }
+    body { margin: 24px; background: #f7f7fb; color: #111827; }
+    .app { max-width: 980px; margin: 0 auto; }
+    header { margin-bottom: 16px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#e0f2fe; color:#075985; font-size:12px; margin-right:6px; }
+    .card { background:white; border-radius:14px; padding:20px; box-shadow: 0 6px 24px rgba(0,0,0,.06); margin: 14px 0; }
+    .q { font-weight: 600; margin-bottom: 10px; }
+    .choices { list-style: none; padding:0; margin:0; display:grid; gap:8px; }
+    .choices li { border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; cursor:pointer; background:#fff; }
+    .choices li.correct { border-color:#16a34a; background:#ecfdf5; }
+    .choices li.incorrect { border-color:#dc2626; background:#fef2f2; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .btn { background:#111827; color:#fff; padding:10px 14px; border:none; border-radius:10px; cursor:pointer; }
+    .btn:disabled{ opacity:.5; cursor:not-allowed; }
+    .muted { color:#6b7280; font-size: 12px }
+    .tag { padding:2px 8px; background:#f1f5f9; border-radius:999px; font-size:12px; color:#334155; }
+    .domain { font-weight:700; color:#0f172a; }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>CCST Networking (100-150) Practice Exam</h1>
+    <div class="muted">50 questions • Based on Cisco's published CCST Networking exam topics: network fundamentals, IP addressing, routing & switching, wireless, security, automation, and troubleshooting.</div>
+    <div style="margin-top:8px;">
+      <span class="pill">Fundamentals</span>
+      <span class="pill">IP Addressing</span>
+      <span class="pill">Routing & Switching</span>
+      <span class="pill">Wireless</span>
+      <span class="pill">Security</span>
+      <span class="pill">Automation</span>
+      <span class="pill">Troubleshooting</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="row">
+      <button id="start" class="btn">Start exam</button>
+      <button id="shuffle" class="btn">Shuffle</button>
+      <button id="reset" class="btn" disabled>Reset</button>
+      <div class="score" id="scoreBoard">Score: 0/0</div>
+    </div>
+  </section>
+
+  <div id="quiz"></div>
+
+  <section class="card">
+    <h2>Answer Key</h2>
+    <details>
+      <summary>Show/Hide key</summary>
+      <ol id="key"></ol>
+    </details>
+  </section>
+
+  <footer class="muted">Created for study purposes. Not affiliated with Cisco.</footer>
+</div>
+
+<script>
+/**
+ * 50 CCST-style questions. Each item: { q, c: [choices], a: index(0-3), d: domainTag }
+ */
+const Q = [
+  // -------------------- Fundamentals (12) --------------------
+  {q:"Which OSI layer is responsible for end-to-end reliable delivery and segmentation?", c:["Network","Transport","Session","Data Link"], a:1, d:"Fundamentals"},
+  {q:"Which protocol discovers the MAC address associated with an IPv4 address on a LAN?", c:["NDP","ARP","DNS","DHCP"], a:1, d:"Fundamentals"},
+  {q:"Which statement about switches vs. hubs is TRUE?", c:["Hubs learn MAC tables; switches repeat all frames","Switches forward based on MAC tables; hubs repeat to all ports","Both forward frames only to default gateway","Hubs operate at OSI Layer 3"], a:1, d:"Fundamentals"},
+  {q:"Which is a characteristic of UDP compared to TCP?", c:["Connection-oriented","Guaranteed delivery","Lower overhead, no sequencing","Built-in congestion control"], a:2, d:"Fundamentals"},
+  {q:"Which port/protocol pair is correct?", c:["SSH — TCP/22","DNS — TCP/110","HTTP — UDP/80","SNMP — TCP/23"], a:0, d:"Fundamentals"},
+  {q:"What is the maximum recommended segment length for copper Ethernet (e.g., 1000BASE‑T)?", c:["55 m","90 m","100 m","300 m"], a:2, d:"Fundamentals"},
+  {q:"Which IPv6 address type is FE80::/10?", c:["Global unicast","Anycast","Link‑local","Unique local"], a:2, d:"Fundamentals"},
+  {q:"Which private IPv4 range is valid?", c:["8.0.0.0/8","10.0.0.0/8","100.64.0.0/10","1.1.1.0/24"], a:1, d:"Fundamentals"},
+  {q:"Which device connects multiple networks and makes forwarding decisions based on IP addresses?", c:["Bridge","Router","Hub","Repeater"], a:1, d:"Fundamentals"},
+  {q:"Which two 2.4 GHz non-overlapping channels are commonly used in North America?", c:["1 and 3","6 and 9","1 and 6","2 and 7"], a:2, d:"Fundamentals"},
+  {q:"Which statement describes DNS?", c:["Assigns IP addresses dynamically","Resolves hostnames to IP addresses","Translates private to public addresses","Synchronizes time"], a:1, d:"Fundamentals"},
+  {q:"Which protocol synchronizes clocks on network devices?", c:["NTP","SMTP","IMAP","Telnet"], a:0, d:"Fundamentals"},
+
+  // -------------------- IP Addressing (8) --------------------
+  {q:"How many usable host addresses are in an IPv4 /26 network?", c:["62","64","30","126"], a:0, d:"IP"},
+  {q:"Which IPv6 prefix denotes unique local addresses (ULA)?", c:["2000::/3","FC00::/7","FF00::/8","FE80::/10"], a:1, d:"IP"},
+  {q:"A host shows 169.254.10.25/16. What does this indicate?", c:["DHCP assigned successfully","APIPA self-assigned address","Public address","Loopback address"], a:1, d:"IP"},
+  {q:"Which record type maps a hostname to an IPv6 address?", c:["A","AAAA","PTR","MX"], a:1, d:"IP"},
+  {q:"Which statement about NAT/PAT is TRUE?", c:["PAT maps many private IPs to one public IP using ports","NAT always encrypts traffic","PAT requires IPv6 only","NAT is a routing protocol"], a:0, d:"IP"},
+  {q:"Which part of 192.168.10.24/29 is the broadcast address?", c:["192.168.10.24","192.168.10.31","192.168.10.30","192.168.10.25"], a:2, d:"IP"},
+  {q:"Which command displays IP configuration on Windows?", c:["ifconfig","ipconfig","route","show ip interface brief"], a:1, d:"IP"},
+  {q:"What DHCP process order is correct?", c:["Discover, Offer, Request, Acknowledge","Detect, Offer, Reply, Accept","Discover, Obtain, Reply, Accept","Detect, Open, Request, Acknowledge"], a:0, d:"IP"},
+
+  // -------------------- Routing & Switching (12) --------------------
+  {q:"What is the primary purpose of VLANs?", c:["Increase Wi‑Fi speed","Log server access","Logically segment a Layer 2 network","Encrypt traffic"], a:2, d:"R/S"},
+  {q:"Which standard defines Ethernet trunking for VLAN tags?", c:["802.1X","802.1Q","802.3af","802.11ax"], a:1, d:"R/S"},
+  {q:"What does STP prevent?", c:["Wireless interference","Routing loops","Broadcast storms from Layer 2 loops","Power loss"], a:2, d:"R/S"},
+  {q:"Which Cisco CLI mode displays a # prompt and allows 'show run'?", c:["User EXEC (>)","Privileged EXEC (#)","ROMMON","Global config (config)#"], a:1, d:"R/S"},
+  {q:"Which command saves the running configuration to startup configuration?", c:["copy running-config startup-config","write erase","erase startup-config","reload"], a:0, d:"R/S"},
+  {q:"An access port should be configured with which commands (conceptually)?", c:["switchport mode trunk; allowed VLANs","switchport mode access; switchport access vlan X","router ospf 1; network","ip nat inside"], a:1, d:"R/S"},
+  {q:"Which routing concept selects the path with the lowest administrative distance?", c:["Load balancing","Route selection precedence","Spanning Tree priority","PoE negotiation"], a:1, d:"R/S"},
+  {q:"Which device typically operates at OSI Layer 2?", c:["Router","Switch","Firewall (stateful)","NAT gateway"], a:1, d:"R/S"},
+  {q:"What is the default native VLAN on many Cisco switches?", c:["VLAN 1","VLAN 10","VLAN 99","No default"], a:0, d:"R/S"},
+  {q:"Which command quickly shows interface status and IPs on a Cisco router/switch?", c:["show ip route","show ip interface brief","show version","show vlan"], a:1, d:"R/S"},
+  {q:"Which cable would you use for a ISP handoff using fiber to a switch SFP?", c:["Cat 5e RJ45","Coax RG‑6","Multimode fiber with LC","Twinax to DB9"], a:2, d:"R/S"},
+  {q:"Which WAN term describes the customer side router?", c:["CSU/DSU","CPE","MDF","IDF"], a:1, d:"R/S"},
+
+  // -------------------- Wireless (6) --------------------
+  {q:"Which Wi‑Fi standard is also known as Wi‑Fi 6?", c:["802.11ac","802.11ax","802.11n","802.11g"], a:1, d:"Wireless"},
+  {q:"Which security method is most secure for home/SOHO today?", c:["WEP","WPA2‑PSK (AES)","Open","WPA3‑SAE"], a:3, d:"Wireless"},
+  {q:"A user near a microwave experiences Wi‑Fi drops. Which band is most affected?", c:["2.4 GHz","5 GHz","6 GHz","60 GHz"], a:0, d:"Wireless"},
+  {q:"What does RSSI represent in WLANs?", c:["Channel width","Signal strength at the receiver","Noise floor","Throughput"], a:1, d:"Wireless"},
+  {q:"Which channels minimize overlap in 2.4 GHz (US)?", c:["1, 5, 9","1, 6, 11","3, 7, 11","2, 4, 6"], a:1, d:"Wireless"},
+  {q:"Band steering typically encourages clients to connect to:", c:["2.4 GHz for long range","5/6 GHz for higher capacity","60 GHz only","Bluetooth PAN"], a:1, d:"Wireless"},
+
+  // -------------------- Security (6) --------------------
+  {q:"Which device inspects traffic and allows/blocks based on stateful rules?", c:["Switch","Router","Firewall","Bridge"], a:2, d:"Security"},
+  {q:"Which configuration best hardens a SOHO wireless network?", c:["Hide SSID; use WEP","Use WPA3‑SAE; strong passphrase","Open network; captive portal","Use default admin password"], a:1, d:"Security"},
+  {q:"Which protocol secures remote CLI management?", c:["Telnet","SSH","FTP","TFTP"], a:1, d:"Security"},
+  {q:"What does 802.1X provide when used with a RADIUS server?", c:["Port-based network access control","Link aggregation","VLAN trunking","Address translation"], a:0, d:"Security"},
+  {q:"Which statement about ACLs is TRUE?", c:["ACLs only permit traffic","ACLs can permit or deny based on criteria","ACLs replace firewalls","ACLs operate only at Layer 2"], a:1, d:"Security"},
+  {q:"A small office wants to allow web traffic from the Internet to a single internal web server. Which feature?", c:["PAT","Port forwarding (static NAT)","DHCP reservation","QoS"], a:1, d:"Security"},
+
+  // -------------------- Automation & Tools (4) --------------------
+  {q:"Which data format is most common in REST APIs for network automation?", c:["CSV","JSON","YAML","INI"], a:1, d:"Automation"},
+  {q:"Which statement describes controller‑based (SDN) networking?", c:["Control plane is centralized; devices are programmed via APIs","All devices make independent control decisions only","No need for switches","Uses only IPv6"], a:0, d:"Automation"},
+  {q:"Which tool captures packets for analysis?", c:["traceroute","tcpdump / Wireshark","nslookup","ipconfig"], a:1, d:"Automation"},
+  {q:"A script returns an HTTP 200 from a network device API. What does this generally mean?", c:["Authentication failed","Resource created","Request succeeded","Server error"], a:2, d:"Automation"},
+
+  // -------------------- Troubleshooting (12) --------------------
+  {q:"What is the FIRST step in a structured troubleshooting methodology?", c:["Implement the fix","Identify the problem","Document findings","Establish a theory"], a:1, d:"Troubleshoot"},
+  {q:"Users in one VLAN can’t reach another VLAN; gateways configured on the switch. Likely missing?", c:["DHCP server","Inter‑VLAN routing (SVI routing)","PoE","STP"], a:1, d:"Troubleshoot"},
+  {q:"A PC can ping its gateway but no Internet sites by name. Most likely cause?", c:["Bad DNS settings","Bad NIC","Wrong gateway","Duplicate MAC"], a:0, d:"Troubleshoot"},
+  {q:"Wi‑Fi shows strong signal but very low throughput at lunch time. Best remediation?", c:["Reduce channel width only","Add capacity/APs and load balance","Disable 5 GHz","Switch to WEP"], a:1, d:"Troubleshoot"},
+  {q:"Which tool shows each hop to a destination and where latency occurs?", c:["ping","traceroute","netstat","dig"], a:1, d:"Troubleshoot"},
+  {q:"A switch port has many CRC errors. First action?", c:["Replace entire switch","Change cable/port; check duplex/speed","Increase MTU","Disable STP"], a:1, d:"Troubleshoot"},
+  {q:"Host obtains 0.0.0.0 IP or APIPA repeatedly. What should you check first?", c:["DNS server","DHCP server reachability/scope","NTP server","SMTP server"], a:1, d:"Troubleshoot"},
+  {q:"Client can access local resources but not remote networks. Likely issue?", c:["Default gateway misconfigured","VLAN mismatch","Bad patch cable","Wrong DNS suffix"], a:0, d:"Troubleshoot"},
+  {q:"Intermittent wireless drops on 5 GHz near a radar station. Likely cause?", c:["DFS events","Mismatched SSID","Wrong VLAN","802.1X failure"], a:0, d:"Troubleshoot"},
+  {q:"A trunk link suddenly carries only one VLAN. What should you verify?", c:["Native VLAN ID","Allowed VLAN list and trunk mode","DHCP lease time","QoS trust"], a:1, d:"Troubleshoot"},
+  {q:"Help desk receives a ticket: 'Cannot reach fileshare by name.' Others OK. First local step?", c:["Flush and renew DNS cache; verify DNS server","Replace router","Change subnet mask","Disable IPv6"], a:0, d:"Troubleshoot"},
+  {q:"After implementing a fix, what should you do NEXT?", c:["Close the ticket immediately","Verify full functionality and implement preventive measures","Erase logs","Ignore documentation"], a:1, d:"Troubleshoot"},
+];
+
+const quizEl = document.getElementById('quiz');
+const keyEl = document.getElementById('key');
+const scoreBoard = document.getElementById('scoreBoard');
+let answered = 0, correct = 0;
+
+function render(questions){
+  quizEl.innerHTML = '';
+  keyEl.innerHTML = '';
+  answered = 0; correct = 0; updateScore();
+  questions.forEach((it, idx) => {
+    const card = document.createElement('div'); card.className = 'card';
+    const meta = document.createElement('div');
+    meta.innerHTML = `<span class="tag">#${idx+1}</span> <span class="tag domain">${it.d}</span>`;
+    const q = document.createElement('div'); q.className = 'q'; q.textContent = it.q;
+    const ul = document.createElement('ul'); ul.className = 'choices';
+
+    it.c.forEach((text, i) => {
+      const li = document.createElement('li'); li.textContent = String.fromCharCode(65+i) + '. ' + text;
+      li.addEventListener('click', () => {
+        if (li.classList.contains('correct') || li.classList.contains('incorrect')) return;
+        const wasCorrect = (i === it.a);
+        [...ul.children].forEach((s, j) => {
+          if (j === it.a) s.classList.add('correct');
+          else if (s === li) s.classList.add('incorrect');
+        });
+        answered++; if (wasCorrect) correct++; updateScore();
+      });
+      ul.appendChild(li);
+    });
+
+    card.appendChild(meta); card.appendChild(q); card.appendChild(ul);
+    quizEl.appendChild(card);
+
+    const liKey = document.createElement('li');
+    liKey.textContent = `Q${idx+1}: ${String.fromCharCode(65+it.a)} (${it.d})`;
+    keyEl.appendChild(liKey);
+  });
+}
+
+function updateScore(){ scoreBoard.textContent = `Score: ${correct}/${answered}`; }
+
+function shuffle(array){
+  for (let i = array.length -1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// controls
+const startBtn = document.getElementById('start');
+const shuffleBtn = document.getElementById('shuffle');
+const resetBtn = document.getElementById('reset');
+
+startBtn.addEventListener('click', ()=>{ render(Q); resetBtn.disabled = false; });
+shuffleBtn.addEventListener('click', ()=>{ const copy = [...Q]; shuffle(copy); render(copy); resetBtn.disabled = false; });
+resetBtn.addEventListener('click', ()=>{ render(Q); });
+</script>
+</body>
+</html>
