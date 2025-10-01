@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CompTIA A+ 220-1202 (Core 2) Practice Quiz — 90 Questions</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
+    body { margin: 24px; background: #f7f7fb; color: #1f2937; }
+    .app { max-width: 980px; margin: 0 auto; }
+    header { margin-bottom: 16px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size: 12px; margin-right:6px; }
+    .card { background:white; border-radius:14px; padding:20px; box-shadow: 0 6px 24px rgba(0,0,0,.06); margin: 14px 0; }
+    .q { font-weight: 600; margin-bottom: 10px; }
+    .choices { list-style: none; padding:0; margin:0; display:grid; gap:8px; }
+    .choices li { border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; cursor:pointer; background:#fff; }
+    .choices li.correct { border-color:#16a34a; background:#ecfdf5; }
+    .choices li.incorrect { border-color:#dc2626; background:#fef2f2; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .btn { background:#111827; color:#fff; padding:10px 14px; border:none; border-radius:10px; cursor:pointer; }
+    .btn:disabled{ opacity:.5; cursor:not-allowed; }
+    .muted { color:#6b7280; font-size: 12px }
+    .tag { padding:2px 8px; background:#f1f5f9; border-radius:999px; font-size:12px; color:#334155; }
+    .score { font-size: 18px; font-weight:700; }
+    details summary { cursor:pointer; }
+    .domain { font-weight:700; color:#0f172a; }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>CompTIA A+ 220-1202 (Core 2) Practice Quiz</h1>
+    <div class="muted">90 questions • Domains weighted roughly to 220-1202: Operating Systems (31%), Security (25%), Software Troubleshooting (22%), Operational Procedures (22%).</div>
+    <div style="margin-top:8px;">
+      <span class="pill">Operating Systems</span>
+      <span class="pill">Security</span>
+      <span class="pill">Software Troubleshooting</span>
+      <span class="pill">Operational Procedures</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="row">
+      <button id="start" class="btn">Start quiz</button>
+      <button id="shuffle" class="btn">Shuffle</button>
+      <button id="reset" class="btn" disabled>Reset</button>
+      <div class="score" id="scoreBoard">Score: 0/0</div>
+    </div>
+  </section>
+
+  <div id="quiz"></div>
+
+  <section class="card">
+    <h2>Answer Key</h2>
+    <details>
+      <summary>Show/Hide key</summary>
+      <ol id="key"></ol>
+    </details>
+  </section>
+
+  <footer class="muted">Created for study purposes. Not affiliated with CompTIA.</footer>
+</div>
+
+<script>
+/**
+ * 90 questions distributed by domain in line with 220-1202 Core 2.
+ * Each item: { q, c: [choices], a: index(0-3), d: domainTag }
+ */
+const Q = [
+  // -------------------- Operating Systems (28) --------------------
+  {q:"Which Windows tool lists services, startup apps, and boot options in one place?", c:["Task Scheduler","msconfig","regedit","perfmon"], a:1, d:"OS"},
+  {q:"In Windows 10/11, which setting enables BitLocker on a system with a TPM?", c:["Device Encryption","Storage Sense","System Restore","ReadyBoost"], a:0, d:"OS"},
+  {q:"Which command creates a new local user account in Windows PowerShell?", c:["net user /add","useradd","Add-LocalUser","dsadd user"], a:2, d:"OS"},
+  {q:"Which Windows log would you check for application crashes?", c:["System","Application","Security","Setup"], a:1, d:"OS"},
+  {q:"Which file system supports permissions, EFS, and large volumes on Windows?", c:["FAT32","exFAT","NTFS","ReFS only"], a:2, d:"OS"},
+  {q:"Which utility repairs corrupted system files by verifying component store first?", c:["sfc /scannow only","DISM /RestoreHealth then SFC","chkdsk /r then format","bootrec /fixboot only"], a:1, d:"OS"},
+  {q:"To map a network drive persistently from cmd, use:", c:["net use X: \\\server\\share /persistent:yes","mount -t cifs","New-PSDrive -Persist:$false","icacls"], a:0, d:"OS"},
+  {q:"Which Windows 11 edition first natively includes Hyper‑V?", c:["Home","Pro","Education","S"], a:1, d:"OS"},
+  {q:"Which Linux command elevates a single command to run as root?", c:["su","sudo","chmod","passwd"], a:1, d:"OS"},
+  {q:"Where are most Linux system logs stored by default?", c:["/etc","/var/log","/usr/local","/tmp"], a:1, d:"OS"},
+  {q:"On macOS, Time Machine primarily performs what function?", c:["Disk repair","Versioned backups","Anti‑malware","RAID"], a:1, d:"OS"},
+  {q:"Which partition style supports disks larger than 2 TB and more partitions?", c:["MBR","GPT","Dynamic basic","LVM only"], a:1, d:"OS"},
+  {q:"Which Windows feature restores a system to a previous working configuration without affecting personal files?", c:["System Restore","Reset this PC (remove everything)","Fresh start","In‑place upgrade"], a:0, d:"OS"},
+  {q:"Which command lists IP configuration on Windows?", c:["ifconfig","ip addr","ipconfig","route"], a:2, d:"OS"},
+  {q:"In Linux, which command changes file ownership?", c:["chmod","chown","chgrp","umask"], a:1, d:"OS"},
+  {q:"Which Windows tool manages disks, partitions, and volumes with a GUI?", c:["Disk Management","Device Manager","Computer Management","DISKPART only"], a:0, d:"OS"},
+  {q:"Which Windows update channel focuses on stability for enterprises?", c:["Release Preview","Insider Canary","LTSC","Beta"], a:2, d:"OS"},
+  {q:"Which Linux package managers are correctly matched?", c:["apt — RHEL, yum — Debian","dnf — Fedora, apt — Ubuntu","pacman — SUSE","brew — Debian"], a:1, d:"OS"},
+  {q:"What is the primary use of Windows Event Viewer’s Security log?", c:["Driver failures","Audit logons and policy changes","App crashes","Setup progress"], a:1, d:"OS"},
+  {q:"Which feature allows running Linux tools natively on Windows without a full VM?", c:["Cygwin","WSL","Hyper‑V","VirtualBox"], a:1, d:"OS"},
+  {q:"What does chkdsk /r primarily check?", c:["File permissions","Bad sectors and recoverable data","Only file system metadata","Bootloader"], a:1, d:"OS"},
+  {q:"Which Windows feature encrypts individual files on NTFS volumes?", c:["BitLocker","EFS","IPsec","TLS"], a:1, d:"OS"},
+  {q:"In Linux, which target represents multi‑user graphical mode (systemd)?", c:["multi-user.target","graphical.target","rescue.target","network.target"], a:1, d:"OS"},
+  {q:"Which macOS tool verifies and repairs disk permissions and file system issues?", c:["Disk Utility","Console","Activity Monitor","Keychain Access"], a:0, d:"OS"},
+  {q:"What’s the purpose of the Windows Recovery Environment (WinRE)?", c:["Update drivers","Perform startup repair and recovery tasks","Run domain joins","Disable UAC"], a:1, d:"OS"},
+  {q:"Which utility edits the Windows Boot Configuration Data (BCD)?", c:["msconfig","bcdedit","bootrec /scanos","regedit"], a:1, d:"OS"},
+  {q:"Which command displays running services in Windows?", c:["services.msc","gpedit.msc","devmgmt.msc","diskmgmt.msc"], a:0, d:"OS"},
+  {q:"Which Linux command sends a signal to stop a process gracefully?", c:["kill -9","killall -KILL","kill PID","shutdown -h now"], a:2, d:"OS"},
+
+  // -------------------- Security (22) --------------------
+  {q:"Which malware encrypts data and demands payment?", c:["Spyware","Ransomware","Rootkit","Adware"], a:1, d:"Security"},
+  {q:"A user receives an email from \"IT Support\" asking to reset a password via a link. What attack?", c:["Vishing","Phishing","Smishing","Whaling only"], a:1, d:"Security"},
+  {q:"Which authentication method uses something you are?", c:["Password","Smart card","Biometrics","TOTP"], a:2, d:"Security"},
+  {q:"Which is the MOST secure wireless protocol for modern SOHO?", c:["WEP","WPA2‑PSK (TKIP)","WPA2‑PSK (AES)","WPA3‑SAE"], a:3, d:"Security"},
+  {q:"What is least privilege?", c:["Admin to all","Give users only permissions needed","Guest access always","Disable MFA"], a:1, d:"Security"},
+  {q:"Which Windows feature isolates browser/Office content from the OS (Pro editions)?", c:["UAC","Defender Application Guard","SmartScreen only","Credential Guard"], a:1, d:"Security"},
+  {q:"Which control best mitigates shoulder surfing at kiosks?", c:["Cable lock","Privacy filter","Mantrap","Anti‑tamper screws"], a:1, d:"Security"},
+  {q:"Which port/protocol is used by secure web traffic?", c:["80/HTTP","443/HTTPS","21/FTP","23/Telnet"], a:1, d:"Security"},
+  {q:"Which statement about UAC is true?", c:["It blocks all admin tasks","It prompts for elevation to reduce malware impact","It replaces antivirus","It only works on servers"], a:1, d:"Security"},
+  {q:"Which is a physical security best practice for servers in a branch office?", c:["Store under a desk","Rack with locking cabinet","Leave doors open","Use default passwords"], a:1, d:"Security"},
+  {q:"Which attack floods a service with traffic to make it unavailable?", c:["MITM","DNS poisoning","DoS/DDoS","SQL injection"], a:2, d:"Security"},
+  {q:"Which policy forces users to change passwords regularly while preventing reuse?", c:["Account lockout","Password history & max age","MFA only","Disable caching"], a:1, d:"Security"},
+  {q:"Which tool removes persistent unwanted toolbars and PUPs on Windows?", c:["msconfig only","Anti‑malware/Defender Offline","Disk Cleanup","DISM"], a:1, d:"Security"},
+  {q:"Which setting protects a laptop if it’s stolen by encrypting the whole drive?", c:["BitLocker","NTFS permissions","Firewall","Proxy"], a:0, d:"Security"},
+  {q:"What is the purpose of a screen lock with a short timeout on mobile devices?", c:["Save battery","Reduce overheating","Limit unauthorized access","Improve Wi‑Fi"], a:2, d:"Security"},
+  {q:"Which technology stores hashed user credentials and supports Windows Hello?", c:["TPM","UEFI","RAID","WINS"], a:0, d:"Security"},
+  {q:"Which practice verifies emails/files by ensuring they haven’t been altered?", c:["Encryption","Hashing for integrity","Steganography","DHCP"], a:1, d:"Security"},
+  {q:"Which option best mitigates rogue USB devices delivered via mail?", c:["Disable USB in BIOS or use endpoint control","Use WEP","Use POP3 over 110","Enable UPnP"], a:0, d:"Security"},
+  {q:"Which macOS feature encrypts the system volume?", c:["Keychain","Time Machine","FileVault","Gatekeeper"], a:2, d:"Security"},
+  {q:"What’s the primary benefit of patch management?", c:["Fewer backups","Improved security and stability","Faster boot every time","No need for AV"], a:1, d:"Security"},
+  {q:"Which authentication adds a one‑time rotating code to a password?", c:["Certificate","TOTP MFA","SSO","RBAC"], a:1, d:"Security"},
+  {q:"Which mobile setting prevents data exfiltration via lost devices in BYOD?", c:["MDM with remote wipe","Disable screen rotation","Increase brightness","Disable GPS"], a:0, d:"Security"},
+
+  // -------------------- Software Troubleshooting (20) --------------------
+  {q:"Windows boots to a blank screen with cursor after update. First step?", c:["Reimage immediately","Boot to Safe Mode and roll back update","Replace GPU","Disable BitLocker"], a:1, d:"Soft T/S"},
+  {q:"User cannot open .docx files; Office recently expired. Likely fix?", c:["Install latest GPU drivers","Renew/activate Office or use a viewer","Replace RAM","Change default browser"], a:1, d:"Soft T/S"},
+  {q:"Browser shows many pop‑ups and redirects. First remediation step?", c:["Disable NIC","Run anti‑malware scan and remove extensions","Upgrade CPU","Change DNS"], a:1, d:"Soft T/S"},
+  {q:"App crashes with missing DLL error after install. Next step?", c:["Reinstall app/repair and check dependencies","Replace PSU","Defrag SSD","Change monitor"], a:0, d:"Soft T/S"},
+  {q:"Windows reports \"No boot device\" after imaging. Likely cause?", c:["Wrong boot order or missing bootloader","Bad HDMI port","USB 1.1 only","Wrong keyboard layout"], a:0, d:"Soft T/S"},
+  {q:"Frequent BSODs with MEMORY_MANAGEMENT. First check?", c:["Run Windows Memory Diagnostic","Change theme","Calibrate monitor","Swap mouse"], a:0, d:"Soft T/S"},
+  {q:"After a major update, printers disappeared. Fix?", c:["Reset network stack","Reinstall drivers or add printers via Settings","Replace RAM","Change domain"], a:1, d:"Soft T/S"},
+  {q:"macOS app from unidentified developer won’t open. Where to adjust?", c:["Keychain","Gatekeeper in Security & Privacy","Time Machine","Console"], a:1, d:"Soft T/S"},
+  {q:"Linux system boots to emergency mode. First place to check?", c:["/etc/fstab for bad entries","/etc/hosts","/home/user","/usr/bin"], a:0, d:"Soft T/S"},
+  {q:"Windows Store apps won’t update. Initial fix?", c:["Reset Microsoft Store and sign in","Replace PSU","Delete \\Windows\\System32","Disable Defender"], a:0, d:"Soft T/S"},
+  {q:"Laptop is extremely slow only when connected to corporate VPN. Likely cause?", c:["Thermal throttling","Split‑tunneling disabled; all traffic over VPN","Low disk space","Bad HDMI cable"], a:1, d:"Soft T/S"},
+  {q:"User can’t access a network share they used yesterday. Others can. First local step?", c:["Reboot the switch","Verify credentials/permissions and cached creds","Replace all cables","Disable IPv6"], a:1, d:"Soft T/S"},
+  {q:"Windows activation fails after motherboard replacement. Remedy?", c:["Install more RAM","Run Activation troubleshooter / re‑activate license","Change wallpaper","Reset BIOS"], a:1, d:"Soft T/S"},
+  {q:"Application reports \"certificate not trusted\". Quick check?", c:["System time/date accuracy","Monitor refresh rate","Screen resolution","Disk SMART"], a:0, d:"Soft T/S"},
+  {q:"Random app freezes; Event Viewer shows disk warnings. Next?", c:["Run chkdsk and SMART check; consider replacement","Change mouse pad","Lower resolution","Disable HDR"], a:0, d:"Soft T/S"},
+  {q:"User can’t print; jobs stuck in queue. First fix?", c:["Reboot PC","Restart Print Spooler service and clear queue","Replace toner","Change VLAN"], a:1, d:"Soft T/S"},
+  {q:"Windows update fails with low storage. Best approach?", c:["Delete System32","Use Storage Sense / Disk Cleanup; expand space","Disable firewall","Change theme"], a:1, d:"Soft T/S"},
+  {q:"Linux: permission denied running script.sh. Likely fix?", c:["chown /","chmod +x script.sh","fdisk -l","sudo rm -rf /"], a:1, d:"Soft T/S"},
+  {q:"BSOD after new driver install. First action?", c:["System Restore / Roll back driver","Replace PSU","Change keyboard","Disable Wi‑Fi"], a:0, d:"Soft T/S"},
+  {q:"User profile is corrupted; cannot sign in. Fix?", c:["Format C:","Create new profile and migrate data","Disable UAC","Change wallpaper"], a:1, d:"Soft T/S"},
+
+  // -------------------- Operational Procedures (20) --------------------
+  {q:"Which step comes first in the troubleshooting methodology?", c:["Test theory","Identify the problem","Establish plan of action","Verify full system functionality"], a:1, d:"Ops"},
+  {q:"Which item is ESD‑safe for handling PC components?", c:["Wool sweater","Grounded wrist strap","Plastic bag","Bare hands"], a:1, d:"Ops"},
+  {q:"Which extinguisher type is appropriate for an electrical fire?", c:["Class A","Class B","Class C","Class K"], a:2, d:"Ops"},
+  {q:"What is PII?", c:["Public Internet Interface","Personally Identifiable Information","Peripheral Interface Interconnect","Private Internal Interface"], a:1, d:"Ops"},
+  {q:"Which policy defines how long logs or backups must be kept?", c:["AUP","Data retention policy","DRP","SLA"], a:1, d:"Ops"},
+  {q:"Best practice when documenting a fix?", c:["Skip steps to save time","Record actions, outcomes, and user confirmation","Only note serial numbers","Delete old tickets"], a:1, d:"Ops"},
+  {q:"What is chain of custody in incident response?", c:["A list of users","Evidence handling log from collection to disposal","A backup schedule","Firewall rule set"], a:1, d:"Ops"},
+  {q:"Which action protects privacy when disposing of a HDD?", c:["Quick format only","Overwriting with multiple passes / degauss / shred","Dusting with air","Remove stickers"], a:1, d:"Ops"},
+  {q:"Which is a good communication practice with nontechnical users?", c:["Use acronyms heavily","Avoid empathy","Use plain language and confirm understanding","Interrupt often"], a:2, d:"Ops"},
+  {q:"What should be included in a change-management request?", c:["Feelings","Who, what, when, backout plan, impact","Lunch menu","Vacation plans"], a:1, d:"Ops"},
+  {q:"Which backup type copies only files changed since the last full and clears the archive bit?", c:["Differential","Incremental","Snapshot","Image"], a:1, d:"Ops"},
+  {q:"A help desk ticket is resolved. Final step?", c:["Close ticket without note","Document resolution and obtain user approval","Delete ticket","Escalate"], a:1, d:"Ops"},
+  {q:"Which disposal method is appropriate for damaged lithium batteries?", c:["Trash can","E‑waste recycling per policy","Incinerate","Sink"], a:1, d:"Ops"},
+  {q:"Which compliance framework focuses on payment card data?", c:["HIPAA","PCI DSS","FERPA","GDPR"], a:1, d:"Ops"},
+  {q:"What’s the purpose of an SLA?", c:["Hardware warranty only","Defines service expectations and metrics","Payroll policy","Web cache"], a:1, d:"Ops"},
+  {q:"During on‑site support, what’s the best first action on arrival?", c:["Start changing settings","Introduce yourself, verify user and device, and ask for the issue","Call your manager","Run antivirus"], a:1, d:"Ops"},
+  {q:"Which tool should be used to safely lift heavy equipment?", c:["CRT strap","Hand truck/dolly","Plastic bag","Magnet"], a:1, d:"Ops"},
+  {q:"What should you do before making potentially disruptive changes?", c:["Do it live","Create backups and schedule a maintenance window","Ignore policies","Announce after"], a:1, d:"Ops"},
+  {q:"Which document lists how to restore services after a disaster?", c:["AUP","DR/BCP plan","SLA","MSA"], a:1, d:"Ops"},
+  {q:"What is the best practice for passwords in documentation?", c:["Store in plaintext","Store in a password manager; restrict access","Email to the team","Write on whiteboard"], a:1, d:"Ops"},
+];
+
+const quizEl = document.getElementById('quiz');
+const keyEl = document.getElementById('key');
+const scoreBoard = document.getElementById('scoreBoard');
+let answered = 0, correct = 0;
+
+function render(questions){
+  quizEl.innerHTML = '';
+  keyEl.innerHTML = '';
+  answered = 0; correct = 0; updateScore();
+  questions.forEach((it, idx) => {
+    const card = document.createElement('div'); card.className = 'card';
+    const meta = document.createElement('div');
+    meta.innerHTML = `<span class=\"tag\">#${idx+1}</span> <span class=\"tag domain\">${it.d}</span>`;
+    const q = document.createElement('div'); q.className = 'q'; q.textContent = it.q;
+    const ul = document.createElement('ul'); ul.className = 'choices';
+
+    it.c.forEach((text, i) => {
+      const li = document.createElement('li'); li.textContent = String.fromCharCode(65+i) + '. ' + text;
+      li.addEventListener('click', () => {
+        if (li.classList.contains('correct') || li.classList.contains('incorrect')) return;
+        const wasCorrect = (i === it.a);
+        [...ul.children].forEach((s, j) => {
+          if (j === it.a) s.classList.add('correct');
+          else if (s === li) s.classList.add('incorrect');
+        });
+        answered++; if (wasCorrect) correct++; updateScore();
+      });
+      ul.appendChild(li);
+    });
+
+    card.appendChild(meta); card.appendChild(q); card.appendChild(ul);
+    quizEl.appendChild(card);
+
+    const liKey = document.createElement('li');
+    liKey.textContent = `Q${idx+1}: ${String.fromCharCode(65+it.a)} (${it.d})`;
+    keyEl.appendChild(liKey);
+  });
+}
+
+function updateScore(){ scoreBoard.textContent = `Score: ${correct}/${answered}`; }
+
+function shuffle(array){
+  for (let i = array.length -1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// controls
+const startBtn = document.getElementById('start');
+const shuffleBtn = document.getElementById('shuffle');
+const resetBtn = document.getElementById('reset');
+
+startBtn.addEventListener('click', ()=>{ render(Q); resetBtn.disabled = false; });
+shuffleBtn.addEventListener('click', ()=>{ const copy = [...Q]; shuffle(copy); render(copy); resetBtn.disabled = false; });
+resetBtn.addEventListener('click', ()=>{ render(Q); });
+</script>
+</body>
+</html>
