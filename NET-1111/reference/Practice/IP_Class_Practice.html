@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IPv4 Class Quiz — 100 Addresses</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #121a2a;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --accent: #60a5fa;
+      --good: #22c55e;
+      --bad: #ef4444;
+    }
+    html, body {height: 100%;}
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 70% -100px, #1e293b 0%, var(--bg) 60%);
+      color: var(--text);
+    }
+    .wrap {max-width: 1100px; margin: 0 auto; padding: 28px 18px 56px;}
+    header {display: grid; gap: 10px; margin-bottom: 18px;}
+    h1 {margin: 0; font-weight: 800; letter-spacing: 0.2px;}
+    .card {background: var(--card); border: 1px solid #1f2a44; border-radius: 16px; box-shadow: 0 10px 26px rgba(2,6,23,.3);}
+    .controls {display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 14px; border-bottom: 1px solid #22304f;}
+    .controls button, .controls select {
+      border: 1px solid #2a3b63;
+      background: #0f172a;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .controls button:hover {border-color: var(--accent);}
+    .legend {padding: 14px; border-bottom: 1px solid #22304f; font-size: 14px; line-height: 1.4;}
+    .legend strong {color: #cbd5e1}
+    .legend code {background: #0b1020; padding: 2px 6px; border-radius: 6px; border: 1px solid #1e293b;}
+    .table {width: 100%; border-collapse: collapse;}
+    thead th {position: sticky; top: 0; background: #0f1627; border-bottom: 1px solid #22304f; padding: 10px; text-align: left; font-weight: 700;}
+    tbody td {padding: 10px; border-bottom: 1px dashed #1f2a44;}
+    tbody tr.correct {background: rgba(34,197,94,.09);}
+    tbody tr.incorrect {background: rgba(239,68,68,.08);}
+    .ip {font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-weight: 700;}
+    .badge {display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid #2a3b63; background: #0f172a;}
+    .A {color: #38bdf8}
+    .B {color: #22c55e}
+    .C {color: #f59e0b}
+    .D {color: #a78bfa}
+    .E {color: #f87171}
+    .footer {display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 14px; align-items: center;}
+    .score {font-weight: 800;}
+    .hint {color: var(--muted); font-size: 14px;}
+    .scroll {max-height: 66vh; overflow: auto;}
+    .center {text-align: center;}
+    .small {font-size: 12px; color: var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>IPv4 Class Quiz — 100 Addresses</h1>
+      <div class="sub">Pick the class (A, B, C, D, or E) for each IP address.</div>
+    </header>
+
+    <section class="card">
+      <div class="controls">
+        <button id="regen">🔁 Regenerate 100</button>
+        <button id="showAnswers" class="pill">🧠 Reveal Answers</button>
+        <button id="hideAnswers" class="pill">🙈 Hide Answers</button>
+        <button id="checkAll">✅ Check All</button>
+        <button id="resetAll">♻️ Reset Choices</button>
+      </div>
+      <div class="scroll">
+        <table class="table" id="quiz">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>IP Address</th>
+              <th>Pick Class</th>
+              <th class="center">Result</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="footer">
+        <div class="score" id="score">Score: 0 / 100</div>
+        <div class="hint">Tip: Decide class based on the first octet.</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const tbody = document.querySelector('#quiz tbody');
+    const scoreEl = document.getElementById('score');
+    const btnRegen = document.getElementById('regen');
+    const btnReveal = document.getElementById('showAnswers');
+    const btnHide = document.getElementById('hideAnswers');
+    const btnCheck = document.getElementById('checkAll');
+    const btnReset = document.getElementById('resetAll');
+
+    const CLASS_RANGES = {
+      A: [1, 126],
+      B: [128, 191],
+      C: [192, 223],
+      D: [224, 239],
+      E: [240, 255]
+    };
+
+    function classOf(firstOctet) {
+      if (firstOctet >= 1 && firstOctet <= 126) return 'A';
+      if (firstOctet >= 128 && firstOctet <= 191) return 'B';
+      if (firstOctet >= 192 && firstOctet <= 223) return 'C';
+      if (firstOctet >= 224 && firstOctet <= 239) return 'D';
+      if (firstOctet >= 240 && firstOctet <= 255) return 'E';
+      return 'A';
+    }
+
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function randomIPForClass(cls) {
+      const [lo, hi] = CLASS_RANGES[cls];
+      const o1 = randInt(lo, hi);
+      const o2 = randInt(0, 255);
+      const o3 = randInt(0, 255);
+      const o4 = randInt(0, 255);
+      return `${o1}.${o2}.${o3}.${o4}`;
+    }
+
+    function generateSet() {
+      const set = new Set();
+      const targetPerClass = 20;
+      const counts = {A:0,B:0,C:0,D:0,E:0};
+      for (const cls of ['A','B','C','D','E']) {
+        while (counts[cls] < targetPerClass) {
+          const ip = randomIPForClass(cls);
+          if (!set.has(ip)) {
+            set.add(ip);
+            counts[cls]++;
+          }
+        }
+      }
+      return Array.from(set);
+    }
+
+    function rowTemplate(idx, ip) {
+      const id = `r${idx}`;
+      return `
+        <tr data-ip="${ip}">
+          <td>${idx+1}</td>
+          <td class="ip">${ip}</td>
+          <td>
+            <label><input type="radio" name="${id}" value="A"> A</label>
+            <label><input type="radio" name="${id}" value="B"> B</label>
+            <label><input type="radio" name="${id}" value="C"> C</label>
+            <label><input type="radio" name="${id}" value="D"> D</label>
+            <label><input type="radio" name="${id}" value="E"> E</label>
+          </td>
+          <td class="center result"></td>
+        </tr>
+      `;
+    }
+
+    function renderQuiz(list) {
+      tbody.innerHTML = list.map((ip, i) => rowTemplate(i, ip)).join('');
+      tbody.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener('change', () => {
+          checkRow(input.closest('tr'));
+          updateScore();
+        });
+      });
+      updateScore();
+    }
+
+    function checkRow(tr, showMark = true) {
+      const ip = tr.dataset.ip;
+      const firstOctet = parseInt(ip.split('.')[0], 10);
+      const correct = classOf(firstOctet);
+      const chosen = tr.querySelector('input[type="radio"]:checked')?.value;
+      const result = tr.querySelector('.result');
+      tr.classList.remove('correct','incorrect');
+      if (!chosen) { result.textContent = ''; return false; }
+      const ok = chosen === correct;
+      if (showMark) {
+        result.textContent = ok ? '✓' : '✗';
+        result.style.color = ok ? 'var(--good)' : 'var(--bad)';
+        tr.classList.add(ok ? 'correct' : 'incorrect');
+      }
+      result.dataset.answer = correct;
+      return ok;
+    }
+
+    function revealAnswers(flag) {
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const ip = tr.dataset.ip;
+        const correct = classOf(parseInt(ip.split('.')[0],10));
+        const result = tr.querySelector('.result');
+        if (flag) {
+          result.textContent = correct;
+          result.style.color = 'var(--accent)';
+          tr.classList.remove('correct','incorrect');
+        } else {
+          result.textContent = '';
+        }
+      });
+    }
+
+    function updateScore() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      let correct = 0, answered = 0;
+      rows.forEach(tr => {
+        const chosen = tr.querySelector('input[type="radio"]:checked')?.value;
+        if (chosen) {
+          answered++;
+          if (checkRow(tr, false)) correct++;
+        }
+      });
+      scoreEl.textContent = `Score: ${correct} / ${rows.length}  (answered ${answered})`;
+    }
+
+    btnRegen.addEventListener('click', () => {
+      renderQuiz(generateSet());
+      revealAnswers(false);
+    });
+    btnReveal.addEventListener('click', () => revealAnswers(true));
+    btnHide.addEventListener('click', () => revealAnswers(false));
+    btnCheck.addEventListener('click', () => {
+      tbody.querySelectorAll('tr').forEach(tr => checkRow(tr));
+      updateScore();
+    });
+    btnReset.addEventListener('click', () => {
+      tbody.querySelectorAll('input[type="radio"]').forEach(i => i.checked = false);
+      tbody.querySelectorAll('tr').forEach(tr => { tr.classList.remove('correct','incorrect'); tr.querySelector('.result').textContent = ''; });
+      updateScore();
+    });
+
+    // initial load
+    renderQuiz(generateSet());
+  </script>
+</body>
+</html>
