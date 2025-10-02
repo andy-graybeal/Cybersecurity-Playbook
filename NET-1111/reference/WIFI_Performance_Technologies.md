@@ -1,3 +1,14 @@
+| **Feature**       | **MIMO**                                | **MU-MIMO**                                                                | **OFDMA**                                                        | **Advanced MIMO**                                        |
+| ----------------- | --------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------- |
+| **Full Name**     | Multiple Input Multiple Output          | Multi-User MIMO                                                            | Orthogonal Frequency Division Multiple Access                    | Massive/Extreme MIMO                                     |
+| **Purpose**       | Send multiple streams to **one device** | Send multiple streams to **many devices at once**                          | Split one channel into smaller sub-channels for multiple devices | Use **many more antennas/streams** for higher throughput |
+| **Efficiency**    | Boosts speed for a single user          | Boosts efficiency when many users connected                                | Reduces latency, improves efficiency for IoT/small packets       | Supports very high device density                        |
+| **Analogy**       | A **4-lane highway** for one car        | A teacher helping **several students at once**                             | A **pizza cut into slices** shared at once                       | A **20-lane superhighway**                               |
+| **Introduced In** | Wi-Fi 4 (802.11n)                       | Wi-Fi 5 (802.11ac, downlink only), improved in Wi-Fi 6 (uplink + downlink) | Wi-Fi 6 (802.11ax)                                               | Wi-Fi 7 (802.11be)                                       |
+| **Key Benefit**   | Faster speeds                           | Better multi-device performance                                            | Lower latency, efficient channel use                             | Extreme throughput & capacity                            |
+
+
+
 # Wi-Fi Performance Technologies (CCST Notes)
 
 ## Technology Overview
