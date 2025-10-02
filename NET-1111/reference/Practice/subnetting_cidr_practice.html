@@ -1,0 +1,3119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPv4 CIDR Practice – 100 Problems</title>
+<style>
+  :root{ --bg:#0b1020; --card:#141a2f; --muted:#94a3b8; --ink:#e2e8f0; --accent:#38bdf8; }
+  *{ box-sizing:border-box; }
+  body{ font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--ink); margin:0; }
+  header{ padding:24px; border-bottom:1px solid #1f2a44; position:sticky; top:0; background:linear-gradient(180deg, rgba(11,16,32,.95), rgba(11,16,32,.6)); backdrop-filter: blur(8px); }
+  h1{ margin:0 0 6px; font-size:clamp(20px,2.8vw,28px); }
+  p.sub{ margin:0; color:var(--muted); }
+  .container{ padding:18px 24px 40px; }
+  .controls{ display:flex; gap:12px; align-items:center; margin:16px 0 18px; flex-wrap:wrap; }
+  input[type="search"]{ flex:1 1 260px; padding:10px 12px; border-radius:10px; border:1px solid #26304d; background:#0e162b; color:var(--ink); }
+  select{ padding:10px 12px; border-radius:10px; border:1px solid #26304d; background:#0e162b; color:var(--ink); }
+  button{ padding:8px 10px; border-radius:10px; border:1px solid #2c385d; background:#0f1a33; color:var(--ink); cursor:pointer; }
+  button:hover{ border-color:#3b4e7d; }
+  table{ width:100%; border-collapse:separate; border-spacing:0 10px; }
+  thead th{ text-align:left; font-weight:600; color:#a8b1c7; font-size:14px; padding:0 10px 6px; }
+  tbody tr{ box-shadow: 0 1px 0 0 #1c2642 inset, 0 0 0 1px #1c2642; background:var(--card); }
+  td{ padding:14px 10px; vertical-align:middle; }
+  td.idx{ color:#8aa0c6; width:46px; }
+  .cidr{ font-variant-numeric:tabular-nums; }
+  .pill{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; font-size:12px; border:1px dashed #2a385f; color:#a9b5cf; }
+  .mask{ font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; background:#0b1327; border:1px dashed #2a385f; padding:6px 8px; border-radius:8px; display:inline-block; min-width:120px; text-align:center; }
+  .hidden-val{ filter: blur(6px); }
+  .reveal{ margin-left:8px; }
+  .grid{ display:grid; grid-template-columns: repeat(3, minmax(160px, 1fr)); gap:10px; }
+  .footer{ margin-top:24px; color:#93a4c5; font-size:12px; }
+  .badge{ font-size:11px; padding:4px 8px; border-radius:999px; background:#0b162e; border:1px solid #243359; color:#a2b4d3; }
+</style>
+</head>
+<body>
+<header>
+  <h1>IPv4 CIDR Practice – 100 Problems</h1>
+  <p class="sub">Click <em>Show</em> to reveal the subnet mask, network, broadcast, and usable host range for each CIDR.</p>
+</header>
+<div class="container">
+  <div class="controls">
+    <input id="search" type="search" placeholder="Filter by IP, prefix, or mask (e.g., 10., /26, 255.255.255.192)" oninput="filterRows()">
+    <select id="prefixFilter" onchange="filterRows()">
+      <option value="">All prefixes</option>
+      <option>/30</option><option>/29</option><option>/28</option><option>/27</option>
+      <option>/26</option><option>/25</option><option>/24</option><option>/23</option><option>/22</option><option>/21</option>
+      <option>/20</option><option>/19</option><option>/18</option><option>/17</option><option>/16</option>
+    </select>
+    <button onclick="hideAll()">Hide all</button>
+    <button onclick="showAll()">Reveal all</button>
+    <span class="badge" id="countBadge"></span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>CIDR</th>
+        <th>Subnet Mask</th>
+        <th>Network</th>
+        <th>Broadcast</th>
+        <th>First Usable</th>
+        <th>Last Usable</th>
+        <th>Usable Hosts</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+
+      <tr data-cidr="66.38.15.74/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">1</td>
+        <td class="cidr"><span class="pill">66.38.15.74/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.38.15.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.38.15.95</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.38.15.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.38.15.94</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="25.72.60.160/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">2</td>
+        <td class="cidr"><span class="pill">25.72.60.160/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">25.72.60.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">25.72.60.191</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">25.72.60.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">25.72.60.190</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="16.252.133.197/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">3</td>
+        <td class="cidr"><span class="pill">16.252.133.197/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16.252.133.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16.252.133.223</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16.252.133.193</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16.252.133.222</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="105.99.79.9/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">4</td>
+        <td class="cidr"><span class="pill">105.99.79.9/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.99.78.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.99.79.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.99.78.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.99.79.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="144.147.231.247/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">5</td>
+        <td class="cidr"><span class="pill">144.147.231.247/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">144.147.231.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">144.147.231.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">144.147.231.225</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">144.147.231.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="203.142.15.97/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">6</td>
+        <td class="cidr"><span class="pill">203.142.15.97/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">203.142.12.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">203.142.15.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">203.142.12.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">203.142.15.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="66.30.169.135/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">7</td>
+        <td class="cidr"><span class="pill">66.30.169.135/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.30.169.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.30.169.135</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.30.169.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">66.30.169.134</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="1.205.93.26/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">8</td>
+        <td class="cidr"><span class="pill">1.205.93.26/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1.205.93.24</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1.205.93.31</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1.205.93.25</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1.205.93.30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="174.17.14.161/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">9</td>
+        <td class="cidr"><span class="pill">174.17.14.161/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">174.17.14.160</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">174.17.14.191</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">174.17.14.161</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">174.17.14.190</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="42.90.245.89/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">10</td>
+        <td class="cidr"><span class="pill">42.90.245.89/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">42.90.245.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">42.90.245.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">42.90.245.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">42.90.245.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="165.231.246.198/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">11</td>
+        <td class="cidr"><span class="pill">165.231.246.198/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.231.246.196</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.231.246.199</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.231.246.197</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.231.246.198</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="82.69.66.233/18" data-prefix="/18" data-mask="255.255.192.0">
+        <td class="idx">12</td>
+        <td class="cidr"><span class="pill">82.69.66.233/18</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.192.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">82.69.64.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">82.69.127.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">82.69.64.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">82.69.127.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16382</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="3.242.56.226/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">13</td>
+        <td class="cidr"><span class="pill">3.242.56.226/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.242.56.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.242.56.231</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.242.56.225</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.242.56.230</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="100.41.9.187/18" data-prefix="/18" data-mask="255.255.192.0">
+        <td class="idx">14</td>
+        <td class="cidr"><span class="pill">100.41.9.187/18</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.192.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.41.0.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.41.63.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.41.0.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.41.63.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16382</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="11.33.231.26/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">15</td>
+        <td class="cidr"><span class="pill">11.33.231.26/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">11.33.231.24</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">11.33.231.27</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">11.33.231.25</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">11.33.231.26</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="157.44.132.140/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">16</td>
+        <td class="cidr"><span class="pill">157.44.132.140/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.44.132.140</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.44.132.143</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.44.132.141</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.44.132.142</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="22.179.244.188/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">17</td>
+        <td class="cidr"><span class="pill">22.179.244.188/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">22.179.244.184</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">22.179.244.191</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">22.179.244.185</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">22.179.244.190</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="124.8.96.238/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">18</td>
+        <td class="cidr"><span class="pill">124.8.96.238/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">124.8.96.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">124.8.97.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">124.8.96.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">124.8.97.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="74.95.126.117/20" data-prefix="/20" data-mask="255.255.240.0">
+        <td class="idx">19</td>
+        <td class="cidr"><span class="pill">74.95.126.117/20</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.240.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.95.112.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.95.127.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.95.112.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.95.127.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4094</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="47.145.177.170/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">20</td>
+        <td class="cidr"><span class="pill">47.145.177.170/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">47.145.177.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">47.145.177.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">47.145.177.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">47.145.177.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="35.166.244.151/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">21</td>
+        <td class="cidr"><span class="pill">35.166.244.151/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">35.166.244.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">35.166.245.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">35.166.244.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">35.166.245.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="135.190.47.39/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">22</td>
+        <td class="cidr"><span class="pill">135.190.47.39/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">135.190.46.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">135.190.47.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">135.190.46.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">135.190.47.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="69.11.115.83/21" data-prefix="/21" data-mask="255.255.248.0">
+        <td class="idx">23</td>
+        <td class="cidr"><span class="pill">69.11.115.83/21</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.248.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">69.11.112.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">69.11.119.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">69.11.112.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">69.11.119.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2046</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="56.18.215.17/16" data-prefix="/16" data-mask="255.255.0.0">
+        <td class="idx">24</td>
+        <td class="cidr"><span class="pill">56.18.215.17/16</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.0.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.18.0.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.18.255.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.18.0.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.18.255.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">65534</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="116.3.122.71/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">25</td>
+        <td class="cidr"><span class="pill">116.3.122.71/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.3.122.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.3.122.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.3.122.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.3.122.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="3.154.40.14/20" data-prefix="/20" data-mask="255.255.240.0">
+        <td class="idx">26</td>
+        <td class="cidr"><span class="pill">3.154.40.14/20</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.240.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.154.32.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.154.47.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.154.32.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">3.154.47.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4094</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="60.0.216.197/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">27</td>
+        <td class="cidr"><span class="pill">60.0.216.197/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">60.0.216.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">60.0.216.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">60.0.216.193</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">60.0.216.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="2.216.246.93/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">28</td>
+        <td class="cidr"><span class="pill">2.216.246.93/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2.216.246.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2.216.246.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2.216.246.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2.216.246.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="184.126.132.185/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">29</td>
+        <td class="cidr"><span class="pill">184.126.132.185/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.126.132.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.126.133.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.126.132.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.126.133.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="55.191.86.123/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">30</td>
+        <td class="cidr"><span class="pill">55.191.86.123/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">55.191.86.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">55.191.86.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">55.191.86.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">55.191.86.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="30.230.229.23/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">31</td>
+        <td class="cidr"><span class="pill">30.230.229.23/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30.230.228.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30.230.231.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30.230.228.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30.230.231.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="131.171.29.133/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">32</td>
+        <td class="cidr"><span class="pill">131.171.29.133/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.171.29.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.171.29.159</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.171.29.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.171.29.158</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="76.249.67.86/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">33</td>
+        <td class="cidr"><span class="pill">76.249.67.86/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">76.249.67.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">76.249.67.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">76.249.67.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">76.249.67.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="13.27.144.191/20" data-prefix="/20" data-mask="255.255.240.0">
+        <td class="idx">34</td>
+        <td class="cidr"><span class="pill">13.27.144.191/20</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.240.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.27.144.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.27.159.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.27.144.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.27.159.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4094</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="184.134.186.245/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">35</td>
+        <td class="cidr"><span class="pill">184.134.186.245/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.134.186.244</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.134.186.247</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.134.186.245</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">184.134.186.246</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="197.111.90.229/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">36</td>
+        <td class="cidr"><span class="pill">197.111.90.229/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.111.90.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.111.90.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.111.90.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.111.90.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="136.198.97.249/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">37</td>
+        <td class="cidr"><span class="pill">136.198.97.249/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.198.97.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.198.97.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.198.97.225</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.198.97.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="143.126.223.208/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">38</td>
+        <td class="cidr"><span class="pill">143.126.223.208/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">143.126.223.208</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">143.126.223.223</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">143.126.223.209</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">143.126.223.222</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="165.45.184.171/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">39</td>
+        <td class="cidr"><span class="pill">165.45.184.171/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.45.184.168</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.45.184.175</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.45.184.169</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.45.184.174</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="193.169.235.233/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">40</td>
+        <td class="cidr"><span class="pill">193.169.235.233/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">193.169.235.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">193.169.235.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">193.169.235.225</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">193.169.235.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="13.117.141.121/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">41</td>
+        <td class="cidr"><span class="pill">13.117.141.121/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.117.141.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.117.141.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.117.141.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">13.117.141.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="222.85.7.230/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">42</td>
+        <td class="cidr"><span class="pill">222.85.7.230/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.85.4.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.85.7.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.85.4.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.85.7.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="199.220.48.236/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">43</td>
+        <td class="cidr"><span class="pill">199.220.48.236/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">199.220.48.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">199.220.51.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">199.220.48.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">199.220.51.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="57.212.189.111/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">44</td>
+        <td class="cidr"><span class="pill">57.212.189.111/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">57.212.189.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">57.212.189.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">57.212.189.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">57.212.189.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="98.177.16.35/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">45</td>
+        <td class="cidr"><span class="pill">98.177.16.35/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">98.177.16.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">98.177.17.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">98.177.16.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">98.177.17.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="117.153.123.202/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">46</td>
+        <td class="cidr"><span class="pill">117.153.123.202/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">117.153.123.200</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">117.153.123.207</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">117.153.123.201</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">117.153.123.206</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="164.138.197.22/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">47</td>
+        <td class="cidr"><span class="pill">164.138.197.22/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.138.197.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.138.197.63</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.138.197.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.138.197.62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="28.45.46.20/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">48</td>
+        <td class="cidr"><span class="pill">28.45.46.20/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">28.45.46.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">28.45.46.63</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">28.45.46.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">28.45.46.62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="185.177.2.247/17" data-prefix="/17" data-mask="255.255.128.0">
+        <td class="idx">49</td>
+        <td class="cidr"><span class="pill">185.177.2.247/17</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.128.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">185.177.0.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">185.177.127.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">185.177.0.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">185.177.127.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">32766</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="34.3.64.2/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">50</td>
+        <td class="cidr"><span class="pill">34.3.64.2/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">34.3.64.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">34.3.64.7</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">34.3.64.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">34.3.64.6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="188.173.54.34/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">51</td>
+        <td class="cidr"><span class="pill">188.173.54.34/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.173.54.32</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.173.54.63</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.173.54.33</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.173.54.62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="179.168.27.232/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">52</td>
+        <td class="cidr"><span class="pill">179.168.27.232/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">179.168.27.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">179.168.27.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">179.168.27.225</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">179.168.27.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="156.58.100.105/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">53</td>
+        <td class="cidr"><span class="pill">156.58.100.105/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">156.58.100.96</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">156.58.100.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">156.58.100.97</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">156.58.100.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="118.231.14.235/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">54</td>
+        <td class="cidr"><span class="pill">118.231.14.235/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">118.231.14.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">118.231.14.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">118.231.14.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">118.231.14.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="24.117.133.20/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">55</td>
+        <td class="cidr"><span class="pill">24.117.133.20/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">24.117.133.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">24.117.133.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">24.117.133.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">24.117.133.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="202.203.178.171/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">56</td>
+        <td class="cidr"><span class="pill">202.203.178.171/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">202.203.178.160</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">202.203.178.175</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">202.203.178.161</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">202.203.178.174</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="215.212.233.217/18" data-prefix="/18" data-mask="255.255.192.0">
+        <td class="idx">57</td>
+        <td class="cidr"><span class="pill">215.212.233.217/18</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.192.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">215.212.192.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">215.212.255.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">215.212.192.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">215.212.255.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">16382</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="152.81.4.244/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">58</td>
+        <td class="cidr"><span class="pill">152.81.4.244/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">152.81.4.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">152.81.4.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">152.81.4.193</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">152.81.4.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="115.129.244.232/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">59</td>
+        <td class="cidr"><span class="pill">115.129.244.232/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">115.129.244.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">115.129.244.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">115.129.244.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">115.129.244.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="142.187.172.213/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">60</td>
+        <td class="cidr"><span class="pill">142.187.172.213/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">142.187.172.208</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">142.187.172.223</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">142.187.172.209</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">142.187.172.222</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="197.240.163.57/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">61</td>
+        <td class="cidr"><span class="pill">197.240.163.57/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.240.160.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.240.163.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.240.160.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.240.163.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="116.148.216.89/21" data-prefix="/21" data-mask="255.255.248.0">
+        <td class="idx">62</td>
+        <td class="cidr"><span class="pill">116.148.216.89/21</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.248.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.148.216.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.148.223.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.148.216.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">116.148.223.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2046</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="188.74.3.21/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">63</td>
+        <td class="cidr"><span class="pill">188.74.3.21/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.74.3.16</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.74.3.31</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.74.3.17</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">188.74.3.30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="129.214.29.3/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">64</td>
+        <td class="cidr"><span class="pill">129.214.29.3/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">129.214.29.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">129.214.29.31</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">129.214.29.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">129.214.29.30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="100.178.247.58/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">65</td>
+        <td class="cidr"><span class="pill">100.178.247.58/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.178.247.32</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.178.247.63</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.178.247.33</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">100.178.247.62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="58.135.151.65/21" data-prefix="/21" data-mask="255.255.248.0">
+        <td class="idx">66</td>
+        <td class="cidr"><span class="pill">58.135.151.65/21</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.248.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">58.135.144.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">58.135.151.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">58.135.144.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">58.135.151.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2046</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="113.107.234.93/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">67</td>
+        <td class="cidr"><span class="pill">113.107.234.93/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">113.107.234.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">113.107.234.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">113.107.234.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">113.107.234.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="12.128.208.6/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">68</td>
+        <td class="cidr"><span class="pill">12.128.208.6/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">12.128.208.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">12.128.208.7</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">12.128.208.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">12.128.208.6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="33.191.88.12/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">69</td>
+        <td class="cidr"><span class="pill">33.191.88.12/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">33.191.88.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">33.191.88.31</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">33.191.88.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">33.191.88.30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="197.216.253.78/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">70</td>
+        <td class="cidr"><span class="pill">197.216.253.78/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.216.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.216.255.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.216.252.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">197.216.255.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="164.211.239.216/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">71</td>
+        <td class="cidr"><span class="pill">164.211.239.216/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.211.239.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.211.239.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.211.239.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">164.211.239.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="137.157.153.234/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">72</td>
+        <td class="cidr"><span class="pill">137.157.153.234/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">137.157.153.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">137.157.153.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">137.157.153.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">137.157.153.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="44.198.67.36/29" data-prefix="/29" data-mask="255.255.255.248">
+        <td class="idx">73</td>
+        <td class="cidr"><span class="pill">44.198.67.36/29</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.248</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">44.198.67.32</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">44.198.67.39</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">44.198.67.33</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">44.198.67.38</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">6</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="157.99.221.130/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">74</td>
+        <td class="cidr"><span class="pill">157.99.221.130/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.99.221.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.99.221.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.99.221.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">157.99.221.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="177.202.60.35/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">75</td>
+        <td class="cidr"><span class="pill">177.202.60.35/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">177.202.60.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">177.202.60.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">177.202.60.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">177.202.60.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="213.202.186.132/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">76</td>
+        <td class="cidr"><span class="pill">213.202.186.132/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">213.202.186.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">213.202.186.143</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">213.202.186.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">213.202.186.142</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="136.194.17.104/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">77</td>
+        <td class="cidr"><span class="pill">136.194.17.104/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.194.17.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.194.17.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.194.17.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">136.194.17.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="5.185.198.87/20" data-prefix="/20" data-mask="255.255.240.0">
+        <td class="idx">78</td>
+        <td class="cidr"><span class="pill">5.185.198.87/20</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.240.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">5.185.192.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">5.185.207.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">5.185.192.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">5.185.207.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4094</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="165.12.66.226/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">79</td>
+        <td class="cidr"><span class="pill">165.12.66.226/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.12.66.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.12.66.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.12.66.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">165.12.66.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="23.61.57.64/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">80</td>
+        <td class="cidr"><span class="pill">23.61.57.64/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">23.61.57.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">23.61.57.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">23.61.57.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">23.61.57.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="4.192.58.21/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">81</td>
+        <td class="cidr"><span class="pill">4.192.58.21/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.192.58.16</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.192.58.31</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.192.58.17</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.192.58.30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="102.139.73.232/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">82</td>
+        <td class="cidr"><span class="pill">102.139.73.232/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">102.139.73.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">102.139.73.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">102.139.73.193</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">102.139.73.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="95.130.246.34/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">83</td>
+        <td class="cidr"><span class="pill">95.130.246.34/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">95.130.246.32</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">95.130.246.47</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">95.130.246.33</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">95.130.246.46</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="141.5.202.72/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">84</td>
+        <td class="cidr"><span class="pill">141.5.202.72/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">141.5.202.72</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">141.5.202.75</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">141.5.202.73</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">141.5.202.74</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="111.219.39.58/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">85</td>
+        <td class="cidr"><span class="pill">111.219.39.58/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">111.219.39.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">111.219.39.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">111.219.39.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">111.219.39.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="56.172.135.121/26" data-prefix="/26" data-mask="255.255.255.192">
+        <td class="idx">86</td>
+        <td class="cidr"><span class="pill">56.172.135.121/26</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.172.135.64</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.172.135.127</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.172.135.65</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">56.172.135.126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">62</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="78.207.79.152/24" data-prefix="/24" data-mask="255.255.255.0">
+        <td class="idx">87</td>
+        <td class="cidr"><span class="pill">78.207.79.152/24</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">78.207.79.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">78.207.79.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">78.207.79.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">78.207.79.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="4.149.113.135/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">88</td>
+        <td class="cidr"><span class="pill">4.149.113.135/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.149.113.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.149.113.143</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.149.113.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">4.149.113.142</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="131.87.14.68/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">89</td>
+        <td class="cidr"><span class="pill">131.87.14.68/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.87.12.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.87.15.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.87.12.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.87.15.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="74.121.194.141/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">90</td>
+        <td class="cidr"><span class="pill">74.121.194.141/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.121.192.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.121.195.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.121.192.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.121.195.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="91.125.123.20/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">91</td>
+        <td class="cidr"><span class="pill">91.125.123.20/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">91.125.122.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">91.125.123.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">91.125.122.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">91.125.123.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="131.135.230.212/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">92</td>
+        <td class="cidr"><span class="pill">131.135.230.212/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.135.230.212</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.135.230.215</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.135.230.213</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">131.135.230.214</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="31.131.3.106/22" data-prefix="/22" data-mask="255.255.252.0">
+        <td class="idx">93</td>
+        <td class="cidr"><span class="pill">31.131.3.106/22</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.252.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">31.131.0.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">31.131.3.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">31.131.0.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">31.131.3.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">1022</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="105.57.150.32/17" data-prefix="/17" data-mask="255.255.128.0">
+        <td class="idx">94</td>
+        <td class="cidr"><span class="pill">105.57.150.32/17</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.128.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.57.128.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.57.255.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.57.128.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">105.57.255.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">32766</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="52.67.188.177/30" data-prefix="/30" data-mask="255.255.255.252">
+        <td class="idx">95</td>
+        <td class="cidr"><span class="pill">52.67.188.177/30</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.252</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">52.67.188.176</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">52.67.188.179</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">52.67.188.177</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">52.67.188.178</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">2</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="222.83.242.212/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">96</td>
+        <td class="cidr"><span class="pill">222.83.242.212/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.83.242.208</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.83.242.223</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.83.242.209</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">222.83.242.222</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="166.238.17.97/23" data-prefix="/23" data-mask="255.255.254.0">
+        <td class="idx">97</td>
+        <td class="cidr"><span class="pill">166.238.17.97/23</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.254.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">166.238.16.0</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">166.238.17.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">166.238.16.1</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">166.238.17.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">510</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="158.71.60.230/28" data-prefix="/28" data-mask="255.255.255.240">
+        <td class="idx">98</td>
+        <td class="cidr"><span class="pill">158.71.60.230/28</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.240</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.71.60.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.71.60.239</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.71.60.225</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.71.60.238</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">14</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="158.56.195.192/27" data-prefix="/27" data-mask="255.255.255.224">
+        <td class="idx">99</td>
+        <td class="cidr"><span class="pill">158.56.195.192/27</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.224</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.56.195.192</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.56.195.223</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.56.195.193</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">158.56.195.222</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">30</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+
+      <tr data-cidr="74.42.3.182/25" data-prefix="/25" data-mask="255.255.255.128">
+        <td class="idx">100</td>
+        <td class="cidr"><span class="pill">74.42.3.182/25</span></td>
+        <td>
+          <span class="mask"><span class="hidden-val">255.255.255.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.42.3.128</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.42.3.255</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.42.3.129</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">74.42.3.254</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+        <td>
+          <span class="mask"><span class="hidden-val">126</span></span>
+          <button class="reveal" onclick="toggle(this)">Show</button>
+        </td>
+      </tr>
+    
+    </tbody>
+  </table>
+  <div class="footer">
+    Tip: Try computing the block size from the prefix length (e.g., /26 → block size 64) and use it to find network/broadcast. For /30, remember only 2 usable hosts.
+  </div>
+</div>
+<script>
+function toggle(btn){
+  const span = btn.previousElementSibling.querySelector('.hidden-val');
+  const hidden = span.classList.contains('hidden-val');
+  if(hidden){ span.classList.remove('hidden-val'); btn.textContent = 'Hide'; }
+  else { span.classList.add('hidden-val'); btn.textContent = 'Show'; }
+}
+
+function filterRows(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const pf = document.getElementById('prefixFilter').value;
+  let shown = 0;
+  document.querySelectorAll('#tbody tr').forEach(tr => {
+    const cidr = tr.dataset.cidr.toLowerCase();
+    const prefix = tr.dataset.prefix;
+    const mask = tr.dataset.mask;
+    const matchQ = !q || cidr.includes(q) || mask.includes(q);
+    const matchP = !pf || prefix === pf;
+    const show = matchQ && matchP;
+    tr.style.display = show ? '' : 'none';
+    if(show) shown++;
+  });
+  document.getElementById('countBadge').textContent = shown + ' shown';
+}
+
+function hideAll(){
+  document.querySelectorAll('.hidden-val').forEach(() => {}); // no-op ensures class exists
+  document.querySelectorAll('#tbody .mask .hidden-val').forEach(span => {}); // always hidden by default
+  document.querySelectorAll('#tbody .mask').forEach(mask => {
+    const span = mask.querySelector('span');
+    if(!span.classList.contains('hidden-val')) span.classList.add('hidden-val');
+  });
+  document.querySelectorAll('#tbody .reveal').forEach(btn => btn.textContent = 'Show');
+}
+
+function showAll(){
+  document.querySelectorAll('#tbody .mask').forEach(mask => {
+    const span = mask.querySelector('span');
+    span.classList.remove('hidden-val');
+  });
+  document.querySelectorAll('#tbody .reveal').forEach(btn => btn.textContent = 'Hide');
+}
+
+filterRows();
+</script>
+</body>
+</html>
