@@ -20,3 +20,18 @@ For 10 Mbps → Cat3 is enough
 For 100 Mbps → Cat5 / Cat5e  
 For 1 Gbps → Cat5e minimum  
 For 10 Gbps → Cat6a or better for full-length runs
+
+
+
+
+Another table:  
+| **Ethernet Standard** | **Cable Category**          | **Common Use**      | **Maximum Throughput** | **Maximum Length**          |
+| --------------------- | --------------------------- | ------------------- | ---------------------- | --------------------------- |
+| 10BASE-T              | Cat3 (or better)            | Legacy Ethernet     | 10 Mbps                | 100 m                       |
+| 100BASE-TX            | Cat5 (or better)            | Fast Ethernet       | 100 Mbps               | 100 m                       |
+| 1000BASE-T            | Cat5e (or better)           | Gigabit Ethernet    | 1 Gbps                 | 100 m                       |
+| 2.5GBASE-T            | Cat5e (or better)           | Multi-Gig Ethernet  | 2.5 Gbps               | 100 m                       |
+| 5GBASE-T              | Cat5e / Cat6                | Multi-Gig Ethernet  | 5 Gbps                 | 100 m                       |
+| 10GBASE-T             | Cat6 (55 m) / Cat6a (100 m) | 10 Gigabit Ethernet | 10 Gbps                | 55 m (Cat6) / 100 m (Cat6a) |
+| 25GBASE-T             | Cat8                        | Data Centers        | 25 Gbps                | 30 m                        |
+| 40GBASE-T             | Cat8                        | Data Centers        | 40 Gbps                | 30 m                        |
