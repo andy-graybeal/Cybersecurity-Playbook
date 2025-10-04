@@ -11,18 +11,12 @@
 
 🧠 Key points to remember (for A+ / general use):
 
-The “Base-T” standards all refer to twisted-pair copper Ethernet using RJ-45 style connectors.
-
-As speed increases, the cable category requirement becomes stricter (better shielding, tighter twists, lower crosstalk).
-
+The “Base-T” standards all refer to twisted-pair copper Ethernet using RJ-45 style connectors.  
+As speed increases, the cable category requirement becomes stricter (better shielding, tighter twists, lower crosstalk).  
 Even if a cable can physically connect, it might not reliably support high speeds if it’s a lower category.
 
-A good rule of thumb:
-
-For 10 Mbps → Cat3 is enough
-
-For 100 Mbps → Cat5 / Cat5e
-
-For 1 Gbps → Cat5e minimum
-
+A good rule of thumb:  
+For 10 Mbps → Cat3 is enough  
+For 100 Mbps → Cat5 / Cat5e  
+For 1 Gbps → Cat5e minimum  
 For 10 Gbps → Cat6a or better for full-length runs
