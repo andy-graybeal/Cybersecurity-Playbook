@@ -30,7 +30,7 @@ arrowhead_05 = " ***   *** "
 arrowhead_06 = "   *   *   "
 arrowhead_07 = "   *   *   "
 arrowhead_08 = "   *****   "
-print("\n", arrowhead_01 * 2 + "\n", arrowhead_02 * 2 + "\n", arrowhead_03 * 2 + "\n", arrowhead_04 * 2 + "\n", arrowhead_05 * 2 + "\n", arrowhead_06 * 2 + "\n", arrowhead_07 * 2 + "\n", arrowhead_08 * 2 + "\n")
+print("\n", arrowhead_01 * 2 + "\n", arrowhead_02 * 2 + "\n", arrowhead_03 * 2 + '\n', arrowhead_04 * 2 + "\n", arrowhead_05 * 2 + "\n", arrowhead_06 * 2 + "\n", arrowhead_07 * 2 + "\n", arrowhead_08 * 2 + "\n")
 print()
 
 
