@@ -89,7 +89,7 @@ I had to use a more specific sourcetype than the one given in the Cisco NetAcad 
 
 ##### Revision after review
 
-No instructor feedback had been received when this artifact was prepared. During review with ChatGPT and my own execution checks, I corrected the description of the endpoint summary from counting events to displaying distinct messages. This artifact now explicitly distinguishes `count` from `values(Message)`. I also carried forward the verified time-scope correction from the CSV exercise. These are documented review-based changes, not claimed instructor feedback.
+No instructor feedback had been received when this artifact was prepared. 
 
 #### Cybersecurity Connection
 
