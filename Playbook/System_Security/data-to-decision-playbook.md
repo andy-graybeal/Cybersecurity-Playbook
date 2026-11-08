@@ -82,7 +82,10 @@ My private Activity 4.2 appendix contains the full AI interaction and execution 
 
 #### What I Learned
 
-I learned to inspect field values rather than assume that a walkthrough's search will work unchanged. My local Windows Application events used a more specific sourcetype than the supplied example, so the filter needed adjustment. I also learned that a summary's function matters: event counts and distinct messages answer different questions. Broadening a filter can reveal related activity, but that relationship still needs context before attribution.
+I learned how to install Splunk, import data, run basic filtered SPL searches, and count events using `stats`. I was surprised that Splunk displayed 21 fields from just four rows of data, including extracted fields and metadata. Its built-in autocomplete helped me construct searches and correct syntax as I worked. I haven’t installed Splunk AI Assistant, but I’m interested in trying it.
+
+I had to use a more specific sourcetype than the one given in the Cisco NetAcad example to get the same information. I haven’t confirmed why the sourcetype differed; it may relate to the dataset version or my installation’s configuration.
+
 
 ##### Revision after review
 
