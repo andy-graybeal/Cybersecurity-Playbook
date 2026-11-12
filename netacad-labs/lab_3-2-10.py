@@ -21,5 +21,3 @@ for letter in user_word:
         continue
     else:
         print(letter)
-
-        
