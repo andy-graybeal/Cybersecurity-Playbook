@@ -4,7 +4,7 @@ import time
 
 i = 1
 
-while i < 5:
+while i < 6:
     print (i, "Mississippi") 
     i = i + 1
     time.sleep(1) 
